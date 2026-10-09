@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<lab name="NIDS" version="1" scripttimeout="300" lock="0" author="Rotaru Cristian">
+  <topology>
+    <nodes>
+      <node id="1" name="Debian" type="qemu" template="linux" image="linux-debian" console="vnc" cpu="1" cpulimit="0" ram="512" ethernet="2" uuid="2d9b290a-0b75-49cf-bf64-e0f4d3367770" firstmac="00:50:00:00:01:00" qemu_options="-machine type=pc,accel=kvm -vga std -usbdevice tablet -boot order=cd -cpu host" qemu_version="2.4.0" qemu_arch="x86_64" qemu_nic="virtio-net-pci" delay="0" icon="Server-2D-Linux-S.svg" config="0" left="747" top="297">
+        <interface id="0" name="e0" type="ethernet" network_id="4"/>
+        <interface id="1" name="e1" type="ethernet" network_id="1"/>
+      </node>
+      <node id="3" name="Floodlight" type="qemu" template="linux" image="linux-debian12" console="vnc" cpu="1" cpulimit="0" ram="2048" ethernet="2" uuid="553019b9-d51b-47ae-b8e4-76f80976e0f3" firstmac="00:50:00:00:03:00" qemu_options="-machine type=pc,accel=kvm -vga std -usbdevice tablet -boot order=cd -cpu host" qemu_version="2.4.0" qemu_arch="x86_64" qemu_nic="virtio-net-pci" delay="0" icon="Server-2D-Linux-S.svg" config="0" left="498" top="120">
+        <interface id="0" name="e0" type="ethernet" network_id="1"/>
+        <interface id="1" name="e1" type="ethernet" network_id="2"/>
+      </node>
+      <node id="4" name="OVS-Switch" type="qemu" template="linux" image="linux-debian12" console="vnc" cpu="2" cpulimit="0" ram="512" ethernet="4" uuid="256077d0-f6cd-4950-87c8-79bc1b998daf" firstmac="00:50:00:00:04:00" qemu_options="-machine type=pc,accel=kvm -vga std -usbdevice tablet -boot order=cd -cpu host" qemu_version="2.4.0" qemu_arch="x86_64" qemu_nic="virtio-net-pci" delay="0" icon="Server-2D-Linux-S.svg" config="0" left="492" top="294">
+        <interface id="0" name="e0" type="ethernet" network_id="2"/>
+        <interface id="1" name="e1" type="ethernet" network_id="3"/>
+        <interface id="2" name="e2" type="ethernet" network_id="4"/>
+        <interface id="3" name="e3" type="ethernet" network_id="6"/>
+      </node>
+      <node id="2" name="Kali" type="qemu" template="linux" image="linux-kali" console="vnc" cpu="1" cpulimit="0" ram="1024" ethernet="2" uuid="81ac88b4-6bea-415f-aca1-3307e264dd02" firstmac="00:50:00:00:02:00" qemu_options="-machine type=pc,accel=kvm -vga std -usbdevice tablet -boot order=cd -cpu host" qemu_version="2.4.0" qemu_arch="x86_64" qemu_nic="virtio-net-pci" delay="0" icon="Server-2D-Linux-S.svg" config="0" left="279" top="294">
+        <interface id="0" name="e0" type="ethernet" network_id="3"/>
+        <interface id="1" name="e1" type="ethernet" network_id="1"/>
+      </node>
+      <node id="5" name="IDS-Snort" type="qemu" template="linux" image="linux-debian12" console="vnc" cpu="2" cpulimit="0" ram="8192" ethernet="2" uuid="7af1d3f5-67bd-47b9-b726-848af6651e5d" firstmac="00:50:00:00:05:00" qemu_options="-machine type=pc,accel=kvm -vga std -usbdevice tablet -boot order=cd -cpu host" qemu_version="2.4.0" qemu_arch="x86_64" qemu_nic="virtio-net-pci" delay="0" icon="Server-2D-Linux-S.svg" config="0" left="498" top="426">
+        <interface id="0" name="e0" type="ethernet" network_id="6"/>
+        <interface id="1" name="e1" type="ethernet" network_id="5"/>
+      </node>
+    </nodes>
+    <networks>
+      <network id="1" type="pnet0" name="Net" left="507" top="3" visibility="1" icon="01-Cloud-Default.svg"/>
+      <network id="2" type="bridge" name="Net-Floodlightiface_1" left="496" top="184" visibility="0" icon="lan.png"/>
+      <network id="4" type="bridge" name="Net-Debianiface_0" left="402" top="298" visibility="0" icon="lan.png"/>
+      <network id="3" type="bridge" name="Net-Kaliiface_0" left="447" top="235" visibility="0" icon="lan.png"/>
+      <network id="5" type="pnet0" name="Net" left="495" top="543" visibility="1" icon="01-Cloud-Default.svg"/>
+      <network id="6" type="bridge" name="Net-OVS-Switchiface_3" left="762" top="472" visibility="0" icon="lan.png"/>
+    </networks>
+  </topology>
+</lab>

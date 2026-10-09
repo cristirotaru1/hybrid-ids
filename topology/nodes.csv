@@ -1,6 +1,6 @@
-node,role,data_address,management_address,important_interfaces,notes
-Kali,traffic generator,10.10.0.2/24,192.168.122.11/24,eth0=data; eth1=management,Use only authorized test traffic
-Debian,target services,10.10.0.3/24,192.168.122.12/24,ens3=data; ens4=management,Provides SSH and bounded test services
-IDS,Snort and application stack,10.10.0.4/24,192.168.122.13/24,ens3=mirrored sensor; ens4=management,Debian 12; sensor must receive actual mirrored traffic
-Floodlight,SDN controller,10.0.0.1,192.168.122.10/24,controller/data link; management,REST API on 8080 and OpenFlow on 6653
-OVS,OpenFlow switch,,,data ports plus separate controller-facing interface,OpenFlow13; expected thesis DPID 0000005000000401
+node,role,data_address,management_address,eve_interfaces,guest_interfaces,notes
+Kali,traffic generator,10.10.0.2/24,192.168.122.11/24,e0=OVS e1; e1=pnet0,eth0=data; eth1=management,Use only authorized test traffic
+Debian,target services,10.10.0.3/24,192.168.122.12/24,e0=OVS e2; e1=pnet0,ens3=data; ens4=management,Provides SSH and bounded test services
+IDS-Snort,Snort and application stack,10.10.0.4/24,192.168.122.13/24,e0=OVS e3; e1=pnet0,ens3=mirrored sensor; ens4=management,Debian 12; sensor must receive actual mirrored traffic
+Floodlight,SDN controller,10.0.0.1,192.168.122.10/24,e0=pnet0; e1=OVS e0,controller/data link; management,REST API on 8080 and OpenFlow on 6653
+OVS-Switch,OpenFlow switch,,,e0=Floodlight e1; e1=Kali e0; e2=Debian e0; e3=IDS-Snort e0,data ports plus separate controller-facing interface,OpenFlow13; expected thesis DPID 0000005000000401
