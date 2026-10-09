@@ -1,0 +1,86 @@
+{
+  "annotations": {"list": []},
+  "editable": true,
+  "graphTooltip": 1,
+  "id": null,
+  "links": [],
+  "panels": [
+    {
+      "gridPos": {"h": 3, "w": 24, "x": 0, "y": 0},
+      "id": 1,
+      "options": {
+        "content": "# Experimental ML anomaly replay\nCandidate A did not pass the normal-validation promotion gate. A flag means unusual behavior relative to the learned baseline, not proof of an attack.",
+        "mode": "markdown"
+      },
+      "title": "Model status",
+      "type": "text"
+    },
+    {
+      "datasource": {"type": "loki", "uid": "afoxdf36svbi8c"},
+      "fieldConfig": {"defaults": {"color": {"mode": "thresholds"}, "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}]}}, "overrides": []},
+      "gridPos": {"h": 5, "w": 8, "x": 0, "y": 3},
+      "id": 2,
+      "options": {"colorMode": "value", "graphMode": "area", "justifyMode": "auto", "orientation": "auto", "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false}, "textMode": "auto"},
+      "targets": [{"datasource": {"type": "loki", "uid": "afoxdf36svbi8c"}, "editorMode": "code", "expr": "sum(count_over_time({job=\"ids_ml_replay\", event_type=\"flow_scored\"}[$__range]))", "queryType": "instant", "refId": "A"}],
+      "title": "Flows scored",
+      "type": "stat"
+    },
+    {
+      "datasource": {"type": "loki", "uid": "afoxdf36svbi8c"},
+      "fieldConfig": {"defaults": {"color": {"mode": "thresholds"}, "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}, {"color": "red", "value": 1}]}}, "overrides": []},
+      "gridPos": {"h": 5, "w": 8, "x": 8, "y": 3},
+      "id": 3,
+      "options": {"colorMode": "background", "graphMode": "area", "justifyMode": "auto", "orientation": "auto", "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false}, "textMode": "auto"},
+      "targets": [{"datasource": {"type": "loki", "uid": "afoxdf36svbi8c"}, "editorMode": "code", "expr": "sum(count_over_time({job=\"ids_ml_replay\", event_type=\"flow_scored\", anomaly=\"true\"}[$__range]))", "queryType": "instant", "refId": "A"}],
+      "title": "Anomalous flows",
+      "type": "stat"
+    },
+    {
+      "datasource": {"type": "loki", "uid": "afoxdf36svbi8c"},
+      "fieldConfig": {"defaults": {"color": {"mode": "thresholds"}, "decimals": 4, "thresholds": {"mode": "absolute", "steps": [{"color": "green", "value": null}, {"color": "red", "value": 0}]}}, "overrides": []},
+      "gridPos": {"h": 5, "w": 8, "x": 16, "y": 3},
+      "id": 4,
+      "options": {"colorMode": "value", "graphMode": "area", "justifyMode": "auto", "orientation": "auto", "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false}, "textMode": "auto"},
+      "targets": [{"datasource": {"type": "loki", "uid": "afoxdf36svbi8c"}, "editorMode": "code", "expr": "max_over_time({job=\"ids_ml_replay\", event_type=\"flow_scored\"} | json | unwrap threshold_margin | __error__=\"\" [$__range])", "queryType": "instant", "refId": "A"}],
+      "title": "Maximum threshold margin",
+      "type": "stat"
+    },
+    {
+      "datasource": {"type": "loki", "uid": "afoxdf36svbi8c"},
+      "fieldConfig": {"defaults": {"color": {"mode": "palette-classic"}}, "overrides": []},
+      "gridPos": {"h": 8, "w": 14, "x": 0, "y": 8},
+      "id": 5,
+      "options": {"legend": {"calcs": ["sum"], "displayMode": "table", "placement": "bottom", "showLegend": true}, "tooltip": {"mode": "multi", "sort": "desc"}},
+      "targets": [{"datasource": {"type": "loki", "uid": "afoxdf36svbi8c"}, "editorMode": "code", "expr": "sum by (protocol, anomaly) (count_over_time({job=\"ids_ml_replay\", event_type=\"flow_scored\"}[$__interval]))", "legendFormat": "{{protocol}} anomaly={{anomaly}}", "queryType": "range", "refId": "A"}],
+      "title": "Flow decisions by protocol",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {"type": "loki", "uid": "afoxdf36svbi8c"},
+      "gridPos": {"h": 8, "w": 10, "x": 14, "y": 8},
+      "id": 6,
+      "options": {"dedupStrategy": "none", "enableLogDetails": true, "prettifyLogMessage": true, "showCommonLabels": false, "showLabels": false, "showTime": true, "sortOrder": "Descending", "wrapLogMessage": true},
+      "targets": [{"datasource": {"type": "loki", "uid": "afoxdf36svbi8c"}, "editorMode": "code", "expr": "{job=\"ids_ml_replay\", event_type=\"flow_scored\", anomaly=\"true\"} | json", "queryType": "range", "refId": "A"}],
+      "title": "Anomalous flow details",
+      "type": "logs"
+    },
+    {
+      "datasource": {"type": "loki", "uid": "afoxdf36svbi8c"},
+      "gridPos": {"h": 7, "w": 24, "x": 0, "y": 16},
+      "id": 7,
+      "options": {"dedupStrategy": "none", "enableLogDetails": true, "prettifyLogMessage": true, "showCommonLabels": false, "showLabels": false, "showTime": true, "sortOrder": "Descending", "wrapLogMessage": true},
+      "targets": [{"datasource": {"type": "loki", "uid": "afoxdf36svbi8c"}, "editorMode": "code", "expr": "{job=\"ids_ml_replay\", event_type=~\"replay_started|replay_completed\"} | json", "queryType": "range", "refId": "A"}],
+      "title": "Replay sessions",
+      "type": "logs"
+    }
+  ],
+  "refresh": "5s",
+  "schemaVersion": 39,
+  "tags": ["ids", "ml", "anomaly", "experimental"],
+  "templating": {"list": []},
+  "time": {"from": "now-15m", "to": "now"},
+  "timezone": "browser",
+  "title": "ML Anomaly Replay Monitoring",
+  "uid": "ids-ml-replay",
+  "version": 1
+}

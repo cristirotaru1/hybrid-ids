@@ -1,0 +1,74 @@
+{
+  "capture_count": 1,
+  "columns": {
+    "metadata": [
+      "schema_version",
+      "extractor_version",
+      "capture_id",
+      "scenario_id",
+      "label",
+      "validation_status",
+      "interface",
+      "source_pcap",
+      "source_pcap_sha256",
+      "flow_id",
+      "flow_start_utc",
+      "flow_end_utc",
+      "src_ip",
+      "dst_ip",
+      "termination_reason"
+    ],
+    "model_features": [
+      "flow_duration",
+      "forward_packet_count",
+      "backward_packet_count",
+      "total_packet_count",
+      "forward_bytes",
+      "backward_bytes",
+      "total_bytes",
+      "mean_packet_size",
+      "std_packet_size",
+      "packets_per_second",
+      "bytes_per_second",
+      "syn_count",
+      "ack_count",
+      "rst_count",
+      "fin_count",
+      "src_port",
+      "dst_port",
+      "protocol",
+      "inter_arrival_mean",
+      "inter_arrival_std",
+      "flows_last_10s",
+      "unique_dst_ips_last_10s",
+      "unique_dst_ports_last_10s",
+      "connection_rate_last_10s",
+      "failed_connection_rate_last_10s"
+    ]
+  },
+  "configuration": {
+    "byte_count_basis": "ipv4_total_length",
+    "icmp_idle_timeout_seconds": 10.0,
+    "source_history_window_seconds": 10,
+    "tcp_idle_timeout_seconds": 120.0,
+    "udp_idle_timeout_seconds": 30.0
+  },
+  "dataset_file": "flows_v1.csv",
+  "dataset_schema_version": 1,
+  "dataset_sha256": "6c86924819bec4170397bb0fd7d59737185c8aeab81a38c2a6f2a722ae587814",
+  "empty_capture_ids": [],
+  "extractor_version": "0.1.0",
+  "format": "csv",
+  "inputs": [
+    {
+      "capture_id": "operational_v1_001_udp_closed",
+      "filename": "../capture_campaign_v2/normal_v2_004_udp_spaced.pcap",
+      "flow_count": 20,
+      "sha256": "ad83e8c4025e62bb9818e0a24e8e708e29713cbec22cf42b115e7900c687228a",
+      "size_bytes": 2644
+    }
+  ],
+  "row_count": 20,
+  "source_manifest": "manifest.csv",
+  "source_manifest_sha256": "f4ac34ce1a3276a2ee3f89415e3f2ecc6a9adb9ca1150ce9a0dfa746c6d2b9c6"
+}

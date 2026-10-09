@@ -1,0 +1,52 @@
+{
+  "artifacts": {
+    "scores_file": "evaluation_scores.csv",
+    "scores_sha256": "e0409b18669eb5d0a435c93d7881238169154b83a73e2f15d98608447658e377"
+  },
+  "captures": {
+    "operational_v1_001_udp_closed": {
+      "anomaly_score_maximum": 0.5546724510077553,
+      "anomaly_score_mean": 0.5347708678774177,
+      "anomaly_score_median": 0.5331172334836285,
+      "anomaly_score_minimum": 0.5249705743600621,
+      "label": "operational_anomaly",
+      "provisional_flagged_count": 0,
+      "provisional_flagged_fraction": 0.0,
+      "row_count": 20,
+      "scenario_id": "udp_closed_service"
+    }
+  },
+  "dataset": {
+    "file": "flows_v1.csv",
+    "manifest_file": "manifest_v1.json",
+    "manifest_sha256": "6c3bc265f6b85b7023fedeb0c0b2479ba1ec41f5503ee91d116e0d2febb521c8",
+    "schema_version": 1,
+    "sha256": "6c86924819bec4170397bb0fd7d59737185c8aeab81a38c2a6f2a722ae587814"
+  },
+  "evaluation_report_version": 1,
+  "interpretation": "A provisional flag means unusual relative to the normal baseline; it does not by itself prove an attack.",
+  "label_counts": {
+    "operational_anomaly": 20
+  },
+  "model": {
+    "file": "model.joblib",
+    "manifest_file": "model_manifest.json",
+    "manifest_sha256": "907d12ae50b1d13f837eff24735692e153e43b4974e942ca14882a01fe0b0b3b",
+    "sha256": "6839ec2f6a5ff2d2cfd9dcc577bb259c5842a0caea078f05d3f64b79bd8be4af",
+    "version": 1
+  },
+  "overall": {
+    "anomaly_score_maximum": 0.5546724510077553,
+    "anomaly_score_mean": 0.5347708678774177,
+    "anomaly_score_median": 0.5331172334836285,
+    "anomaly_score_minimum": 0.5249705743600621,
+    "provisional_flagged_count": 0,
+    "provisional_flagged_fraction": 0.0,
+    "row_count": 20
+  },
+  "threshold": {
+    "anomaly_score_threshold": 0.6987829279266998,
+    "flag_rule": "anomaly_score > threshold",
+    "status": "provisional"
+  }
+}

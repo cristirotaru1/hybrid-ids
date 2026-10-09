@@ -1,0 +1,5 @@
+schema_version,capture_id,filename,proposed_partition,sha256,size_bytes,scenario_id,label,interface,validation_status
+5,normal_v5_val_001,../../capture_campaigns/normal/v5_train_calibrate_validate/normal_v5_val_001.pcap,normal_validation,eca478c0d2a9d4d342c53066a63280089a74ea0cd482639fec8c08d4e93c62ee,337862,normal_v5_val_001,normal,ens3,pass
+5,normal_v5_val_002,../../capture_campaigns/normal/v5_train_calibrate_validate/normal_v5_val_002.pcap,normal_validation,d9d9856f5a9e3cc8bd7b6678c75701b634db7a0386a613426898515d908ff614,340108,normal_v5_val_002,normal,ens3,pass
+5,normal_v5_val_003,../../capture_campaigns/normal/v5_train_calibrate_validate/normal_v5_val_003.pcap,normal_validation,8e5d1996f55345318134ba27b0cd072a99d1071f05922d7f7c5a0d67b1365ad3,346012,normal_v5_val_003,normal,ens3,pass
+5,normal_v5_val_004,../../capture_campaigns/normal/v5_train_calibrate_validate/normal_v5_val_004.pcap,normal_validation,933eb86f5eef26a6dee401e756797ea5d7b136cad4f2b7ac474279532b76d538,338514,normal_v5_val_004,normal,ens3,pass

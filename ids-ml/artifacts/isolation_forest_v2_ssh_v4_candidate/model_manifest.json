@@ -1,0 +1,392 @@
+{
+  "artifacts": {
+    "model_file": "models.joblib",
+    "model_sha256": "4954857bb37fb15d6a7cf9bd3d33e69e0221ab3be3998f225e34229cf7a1842a",
+    "scores_file": "model_development_scores.csv",
+    "scores_sha256": "77ace9002f30488d00886e70af0db11be5ae99ae43c947f0ac3113ad2428415e"
+  },
+  "candidate": "v2_behavioral",
+  "datasets": {
+    "calibration": {
+      "extractor_version": "0.3.0",
+      "file": "data/derived/v2/model_v2_ssh_v4_calibration/flows_v2.csv",
+      "manifest_file": "data/derived/v2/model_v2_ssh_v4_calibration/manifest_v2.json",
+      "manifest_sha256": "1e03875406f1ab178faf2c0ea9fc8bf3aab24e39be9057e68d00a92113ef4b13",
+      "schema_version": 2,
+      "sha256": "a72401cff41b6e22f6ae2face7c53aada6982e6e949704d26e95fcfe67ce9b13",
+      "source_manifest_sha256": "d19d21d0c5045fb3d235fb29d2721f95f9bcf045eebbe60871517caa756b0ca9"
+    },
+    "fit": {
+      "extractor_version": "0.3.0",
+      "file": "data/derived/v2/model_v2_ssh_v4_fit/flows_v2.csv",
+      "manifest_file": "data/derived/v2/model_v2_ssh_v4_fit/manifest_v2.json",
+      "manifest_sha256": "4338f3dbd2e8ec49a5979c42494902579be217bf2e3abb47483629cb04b88326",
+      "schema_version": 2,
+      "sha256": "7fc48f69bcb18448cc25c7e7bb87d6559e8cde2846f16e418452b83b1c859655",
+      "source_manifest_sha256": "d4326ac9749707bc8b88805b5cbb5941b7141b4142f293af3ac6b2b19a535fa6"
+    }
+  },
+  "estimator": {
+    "bootstrap": false,
+    "class": "sklearn.ensemble.IsolationForest",
+    "contamination": "auto",
+    "max_samples": "auto",
+    "n_estimators": 300,
+    "n_jobs": 1,
+    "random_state": 42,
+    "scaling": "none"
+  },
+  "known_destination_services": {
+    "definition": "positive TCP/UDP destination ports intentionally observed in accepted normal fit or calibration, including isolated normal operational failures",
+    "normal_failed_tcp_ports_included": [
+      65000
+    ],
+    "services_by_protocol": {
+      "tcp": [
+        22,
+        8080,
+        65000
+      ],
+      "udp": [
+        9999,
+        10000
+      ]
+    }
+  },
+  "limitation": "Normal-only fitting and calibration do not measure anomalous-scenario detection. Semantic novelty rules are not part of this candidate.",
+  "metrics": {
+    "icmp": {
+      "calibration": {
+        "anomaly_score_maximum": 0.6359928776684163,
+        "anomaly_score_mean": 0.38745021999702334,
+        "anomaly_score_median": 0.37124662425828736,
+        "anomaly_score_minimum": 0.3439241941605789,
+        "flagged_count": 5,
+        "flagged_counts_by_capture": {
+          "normal_v3_cal_001_retry1": 3,
+          "normal_v3_cal_002": 1,
+          "normal_v3_cal_004": 1
+        },
+        "flagged_fraction": 0.05,
+        "row_count": 100
+      },
+      "fit": {
+        "anomaly_score_maximum": 0.7309320351925754,
+        "anomaly_score_mean": 0.4219292467359443,
+        "anomaly_score_median": 0.3869397196543866,
+        "anomaly_score_minimum": 0.34364764244889606,
+        "flagged_count": 41,
+        "flagged_counts_by_capture": {
+          "normal_v2_007": 10,
+          "normal_v2_008": 9,
+          "normal_v3_fit_001": 1,
+          "normal_v3_fit_002": 2,
+          "normal_v3_fit_003": 16,
+          "normal_v3_fit_004_retry1": 1,
+          "normal_v3_fit_005": 2
+        },
+        "flagged_fraction": 0.2733333333333333,
+        "row_count": 150
+      }
+    },
+    "tcp": {
+      "calibration": {
+        "anomaly_score_maximum": 0.7140084920108053,
+        "anomaly_score_mean": 0.4314420612787927,
+        "anomaly_score_median": 0.41150769238941665,
+        "anomaly_score_minimum": 0.36439388002488804,
+        "flagged_count": 9,
+        "flagged_counts_by_capture": {
+          "normal_ssh_v4_cal_002": 1,
+          "normal_ssh_v4_cal_003": 3,
+          "normal_v3_cal_003": 2,
+          "normal_v3_cal_004": 3
+        },
+        "flagged_fraction": 0.05142857142857143,
+        "row_count": 175
+      },
+      "fit": {
+        "anomaly_score_maximum": 0.7389448725481009,
+        "anomaly_score_mean": 0.45226954430333516,
+        "anomaly_score_median": 0.4422745709670266,
+        "anomaly_score_minimum": 0.3643405202230103,
+        "flagged_count": 17,
+        "flagged_counts_by_capture": {
+          "normal_ssh_v4_fit_001_retry1": 1,
+          "normal_ssh_v4_fit_002": 1,
+          "normal_ssh_v4_fit_003": 2,
+          "normal_ssh_v4_fit_004": 3,
+          "normal_v3_fit_002": 1,
+          "normal_v3_fit_003": 6,
+          "normal_v3_fit_004_retry1": 1,
+          "normal_v3_fit_005": 2
+        },
+        "flagged_fraction": 0.06746031746031746,
+        "row_count": 252
+      }
+    },
+    "udp": {
+      "calibration": {
+        "anomaly_score_maximum": 0.5810521346243032,
+        "anomaly_score_mean": 0.4023054457123074,
+        "anomaly_score_median": 0.3853817367853232,
+        "anomaly_score_minimum": 0.3418725819458394,
+        "flagged_count": 5,
+        "flagged_counts_by_capture": {
+          "normal_v3_cal_001_retry1": 1,
+          "normal_v3_cal_002": 4
+        },
+        "flagged_fraction": 0.05,
+        "row_count": 100
+      },
+      "fit": {
+        "anomaly_score_maximum": 0.630934053076365,
+        "anomaly_score_mean": 0.42234011044116604,
+        "anomaly_score_median": 0.3869989664134837,
+        "anomaly_score_minimum": 0.34163310067040065,
+        "flagged_count": 27,
+        "flagged_counts_by_capture": {
+          "normal_v2_005": 8,
+          "normal_v2_006": 8,
+          "normal_v3_fit_001": 1,
+          "normal_v3_fit_003": 8,
+          "normal_v3_fit_004_retry1": 1,
+          "normal_v3_fit_005": 1
+        },
+        "flagged_fraction": 0.18,
+        "row_count": 150
+      }
+    }
+  },
+  "model_version": 2,
+  "novelty_policy": {
+    "boundary_provenance": "strict maximum observed across accepted normal fit and calibration rows",
+    "comparison": "numeric novelty is flagged only when value > boundary",
+    "known_destination_services": {
+      "tcp": [
+        22,
+        8080,
+        65000
+      ],
+      "udp": [
+        9999,
+        10000
+      ]
+    },
+    "numeric_upper_boundaries_by_protocol": {
+      "icmp": {
+        "same_protocol_flows_last_10s": 24.0,
+        "unique_dst_ips_last_10s": 1.0,
+        "unique_dst_ports_last_10s": 4.0
+      },
+      "tcp": {
+        "same_protocol_flows_last_10s": 24.0,
+        "unique_dst_ips_last_10s": 1.0,
+        "unique_dst_ports_last_10s": 4.0
+      },
+      "udp": {
+        "same_protocol_flows_last_10s": 24.0,
+        "unique_dst_ips_last_10s": 1.0,
+        "unique_dst_ports_last_10s": 4.0
+      }
+    },
+    "policy_version": 1,
+    "seen_icmp_type_codes": [
+      [
+        8,
+        0
+      ]
+    ],
+    "tcp_failure_burst": {
+      "definition": "current_tcp_failed + failed_tcp_connections_last_10s >= 2 and current_tcp_failed == 1",
+      "minimum_failures_including_current": 2
+    }
+  },
+  "protocol_models": {
+    "icmp": {
+      "anomaly_threshold": 0.46089954973838093,
+      "behavioral_candidate_features": [
+        "flow_duration",
+        "forward_packet_count",
+        "backward_packet_count",
+        "forward_bytes",
+        "backward_bytes",
+        "mean_packet_size",
+        "std_packet_size",
+        "packets_per_second",
+        "bytes_per_second",
+        "inter_arrival_mean",
+        "inter_arrival_std",
+        "flows_last_10s",
+        "unique_dst_ips_last_10s",
+        "unique_dst_ports_last_10s",
+        "connection_rate_last_10s",
+        "same_protocol_flows_last_10s"
+      ],
+      "constant_features_dropped": [
+        "forward_packet_count",
+        "backward_packet_count",
+        "std_packet_size",
+        "inter_arrival_std"
+      ],
+      "learned_features": [
+        "flow_duration",
+        "forward_bytes",
+        "backward_bytes",
+        "mean_packet_size",
+        "packets_per_second",
+        "bytes_per_second",
+        "inter_arrival_mean",
+        "flows_last_10s",
+        "unique_dst_ips_last_10s",
+        "unique_dst_ports_last_10s",
+        "connection_rate_last_10s",
+        "same_protocol_flows_last_10s"
+      ],
+      "protocol_number": 1
+    },
+    "tcp": {
+      "anomaly_threshold": 0.5465904424972137,
+      "behavioral_candidate_features": [
+        "flow_duration",
+        "forward_packet_count",
+        "backward_packet_count",
+        "forward_bytes",
+        "backward_bytes",
+        "mean_packet_size",
+        "std_packet_size",
+        "packets_per_second",
+        "bytes_per_second",
+        "inter_arrival_mean",
+        "inter_arrival_std",
+        "flows_last_10s",
+        "unique_dst_ips_last_10s",
+        "unique_dst_ports_last_10s",
+        "connection_rate_last_10s",
+        "same_protocol_flows_last_10s",
+        "syn_count",
+        "ack_count",
+        "fin_count"
+      ],
+      "constant_features_dropped": [],
+      "learned_features": [
+        "flow_duration",
+        "forward_packet_count",
+        "backward_packet_count",
+        "forward_bytes",
+        "backward_bytes",
+        "mean_packet_size",
+        "std_packet_size",
+        "packets_per_second",
+        "bytes_per_second",
+        "inter_arrival_mean",
+        "inter_arrival_std",
+        "flows_last_10s",
+        "unique_dst_ips_last_10s",
+        "unique_dst_ports_last_10s",
+        "connection_rate_last_10s",
+        "same_protocol_flows_last_10s",
+        "syn_count",
+        "ack_count",
+        "fin_count"
+      ],
+      "protocol_number": 6
+    },
+    "udp": {
+      "anomaly_threshold": 0.5134564860325307,
+      "behavioral_candidate_features": [
+        "flow_duration",
+        "forward_packet_count",
+        "backward_packet_count",
+        "forward_bytes",
+        "backward_bytes",
+        "mean_packet_size",
+        "std_packet_size",
+        "packets_per_second",
+        "bytes_per_second",
+        "inter_arrival_mean",
+        "inter_arrival_std",
+        "flows_last_10s",
+        "unique_dst_ips_last_10s",
+        "unique_dst_ports_last_10s",
+        "connection_rate_last_10s",
+        "same_protocol_flows_last_10s"
+      ],
+      "constant_features_dropped": [
+        "forward_packet_count",
+        "backward_packet_count",
+        "std_packet_size",
+        "inter_arrival_std"
+      ],
+      "learned_features": [
+        "flow_duration",
+        "forward_bytes",
+        "backward_bytes",
+        "mean_packet_size",
+        "packets_per_second",
+        "bytes_per_second",
+        "inter_arrival_mean",
+        "flows_last_10s",
+        "unique_dst_ips_last_10s",
+        "unique_dst_ports_last_10s",
+        "connection_rate_last_10s",
+        "same_protocol_flows_last_10s"
+      ],
+      "protocol_number": 17
+    }
+  },
+  "software": {
+    "joblib": "1.5.3",
+    "numpy": "2.5.2",
+    "python": "3.14.7",
+    "scikit_learn": "1.9.0"
+  },
+  "split": {
+    "calibration_capture_ids": [
+      "normal_v3_cal_001_retry1",
+      "normal_v3_cal_002",
+      "normal_v3_cal_003",
+      "normal_v3_cal_004",
+      "normal_ssh_v4_cal_001",
+      "normal_ssh_v4_cal_002",
+      "normal_ssh_v4_cal_003"
+    ],
+    "fit_capture_ids": [
+      "normal_v2_002",
+      "normal_v2_003",
+      "normal_v2_005",
+      "normal_v2_006",
+      "normal_v2_007",
+      "normal_v2_008",
+      "normal_v3_fit_001",
+      "normal_v3_fit_002",
+      "normal_v3_fit_003",
+      "normal_v3_fit_004_retry1",
+      "normal_v3_fit_005",
+      "normal_ssh_v4_fit_001_retry1",
+      "normal_ssh_v4_fit_002",
+      "normal_ssh_v4_fit_003",
+      "normal_ssh_v4_fit_004"
+    ],
+    "method": "capture-based; no random row split",
+    "row_counts_by_protocol": {
+      "calibration": {
+        "icmp": 100,
+        "tcp": 175,
+        "udp": 100
+      },
+      "fit": {
+        "icmp": 150,
+        "tcp": 252,
+        "udp": 150
+      }
+    }
+  },
+  "status": "development-only",
+  "threshold": {
+    "definition": "95th percentile of independent normal calibration scores",
+    "flag_rule": "anomaly_score > protocol_threshold",
+    "quantile_method": "linear",
+    "target_normal_false_positive_fraction": 0.05
+  }
+}

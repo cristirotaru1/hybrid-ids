@@ -1,0 +1,90 @@
+{
+  "artifacts": {
+    "scores_file": "evaluation_scores.csv",
+    "scores_sha256": "881769cebdaed851bd3e195f60180e3de31234194b3396ec9e1eff39ad5820a0"
+  },
+  "candidates": [
+    "v2_behavioral",
+    "v2_hybrid"
+  ],
+  "dataset": {
+    "file": "data/evaluation/campaign_v1_v2/flows_v2.csv",
+    "manifest_file": "data/evaluation/campaign_v1_v2/manifest_v2.json",
+    "manifest_sha256": "d8cbfc690fc65e73e5c1e239b5725d6656d25cf5baadd03dc8e79c4490d95f29",
+    "row_count": 200,
+    "schema_version": 2,
+    "sha256": "f835b44a179630286b2d5c545a7395d26bcc34b6c59d42b16a7459d79f40eb46"
+  },
+  "decision": {
+    "behavioral": "anomaly_score > protocol_threshold",
+    "hybrid": "behavioral flag OR any semantic novelty reason",
+    "meaning": "flagged output denotes anomalous behavior, not proof of attack"
+  },
+  "metrics": {
+    "behavioral_flagged_count": 165,
+    "behavioral_flagged_fraction": 0.825,
+    "by_capture": {
+      "evaluation_v1_001": {
+        "behavioral_flagged_count": 15,
+        "hybrid_flagged_count": 15,
+        "label": "normal",
+        "row_count": 30,
+        "scenario_id": "normal_mixed_control"
+      },
+      "evaluation_v1_002": {
+        "behavioral_flagged_count": 20,
+        "hybrid_flagged_count": 20,
+        "label": "anomalous_evaluation",
+        "row_count": 20,
+        "scenario_id": "tcp_refused_burst"
+      },
+      "evaluation_v1_003": {
+        "behavioral_flagged_count": 46,
+        "hybrid_flagged_count": 46,
+        "label": "anomalous_evaluation",
+        "row_count": 60,
+        "scenario_id": "udp_burst"
+      },
+      "evaluation_v1_004": {
+        "behavioral_flagged_count": 54,
+        "hybrid_flagged_count": 54,
+        "label": "anomalous_evaluation",
+        "row_count": 60,
+        "scenario_id": "icmp_rapid"
+      },
+      "evaluation_v1_005": {
+        "behavioral_flagged_count": 10,
+        "hybrid_flagged_count": 10,
+        "label": "anomalous_evaluation",
+        "row_count": 10,
+        "scenario_id": "tcp_port_fanout"
+      },
+      "operational_v1_001_udp_closed": {
+        "behavioral_flagged_count": 20,
+        "hybrid_flagged_count": 20,
+        "label": "operational_anomaly",
+        "row_count": 20,
+        "scenario_id": "udp_closed_service"
+      }
+    },
+    "hybrid_flagged_count": 165,
+    "hybrid_flagged_fraction": 0.825,
+    "reason_counts": {
+      "behavioral_score_high": 165,
+      "destination_port_fanout_high": 5,
+      "icmp_type_code_unseen": 10,
+      "same_protocol_flow_rate_high": 70,
+      "tcp_failure_burst": 27,
+      "unseen_destination_service": 7
+    },
+    "row_count": 200
+  },
+  "model": {
+    "file": "artifacts/isolation_forest_v2_behavioral/models.joblib",
+    "manifest_file": "artifacts/isolation_forest_v2_behavioral/model_manifest.json",
+    "manifest_sha256": "08780b7f43fc4de48240ae23aa433f1bf3d8e4b2b3f78727632bb5df3e238fbf",
+    "sha256": "68e0e0369d571c9afea405077e47f14d08c68dac559a021c576f56640dbc0222"
+  },
+  "model_version": 2,
+  "scoring_version": 2
+}

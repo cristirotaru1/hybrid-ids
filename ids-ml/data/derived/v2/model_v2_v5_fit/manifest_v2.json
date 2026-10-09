@@ -1,0 +1,311 @@
+{
+  "capture_count": 18,
+  "columns": {
+    "all": [
+      "schema_version",
+      "extractor_version",
+      "capture_id",
+      "scenario_id",
+      "label",
+      "validation_status",
+      "interface",
+      "source_pcap",
+      "source_pcap_sha256",
+      "flow_id",
+      "flow_start_utc",
+      "flow_end_utc",
+      "src_ip",
+      "dst_ip",
+      "termination_reason",
+      "flow_duration",
+      "forward_packet_count",
+      "backward_packet_count",
+      "total_packet_count",
+      "forward_bytes",
+      "backward_bytes",
+      "total_bytes",
+      "mean_packet_size",
+      "std_packet_size",
+      "packets_per_second",
+      "bytes_per_second",
+      "syn_count",
+      "ack_count",
+      "rst_count",
+      "fin_count",
+      "src_port",
+      "dst_port",
+      "protocol",
+      "inter_arrival_mean",
+      "inter_arrival_std",
+      "current_tcp_failed",
+      "icmp_type_group",
+      "icmp_code",
+      "icmp_is_error",
+      "flows_last_10s",
+      "unique_dst_ips_last_10s",
+      "unique_dst_ports_last_10s",
+      "connection_rate_last_10s",
+      "failed_connection_rate_last_10s",
+      "same_protocol_flows_last_10s",
+      "tcp_attempts_last_10s",
+      "failed_tcp_connections_last_10s"
+    ],
+    "behavioral_additions_by_protocol": {
+      "icmp": [],
+      "tcp": [
+        "syn_count",
+        "ack_count",
+        "fin_count"
+      ],
+      "udp": []
+    },
+    "behavioral_common": [
+      "flow_duration",
+      "forward_packet_count",
+      "backward_packet_count",
+      "forward_bytes",
+      "backward_bytes",
+      "mean_packet_size",
+      "std_packet_size",
+      "packets_per_second",
+      "bytes_per_second",
+      "inter_arrival_mean",
+      "inter_arrival_std",
+      "flows_last_10s",
+      "unique_dst_ips_last_10s",
+      "unique_dst_ports_last_10s",
+      "connection_rate_last_10s",
+      "same_protocol_flows_last_10s"
+    ],
+    "context_only": [
+      "src_port"
+    ],
+    "exported_features": [
+      "flow_duration",
+      "forward_packet_count",
+      "backward_packet_count",
+      "total_packet_count",
+      "forward_bytes",
+      "backward_bytes",
+      "total_bytes",
+      "mean_packet_size",
+      "std_packet_size",
+      "packets_per_second",
+      "bytes_per_second",
+      "syn_count",
+      "ack_count",
+      "rst_count",
+      "fin_count",
+      "src_port",
+      "dst_port",
+      "protocol",
+      "inter_arrival_mean",
+      "inter_arrival_std",
+      "current_tcp_failed",
+      "icmp_type_group",
+      "icmp_code",
+      "icmp_is_error",
+      "flows_last_10s",
+      "unique_dst_ips_last_10s",
+      "unique_dst_ports_last_10s",
+      "connection_rate_last_10s",
+      "failed_connection_rate_last_10s",
+      "same_protocol_flows_last_10s",
+      "tcp_attempts_last_10s",
+      "failed_tcp_connections_last_10s"
+    ],
+    "metadata": [
+      "schema_version",
+      "extractor_version",
+      "capture_id",
+      "scenario_id",
+      "label",
+      "validation_status",
+      "interface",
+      "source_pcap",
+      "source_pcap_sha256",
+      "flow_id",
+      "flow_start_utc",
+      "flow_end_utc",
+      "src_ip",
+      "dst_ip",
+      "termination_reason"
+    ],
+    "novelty_policy_inputs": [
+      "dst_port",
+      "rst_count",
+      "current_tcp_failed",
+      "icmp_type_group",
+      "icmp_code",
+      "icmp_is_error",
+      "same_protocol_flows_last_10s",
+      "unique_dst_ips_last_10s",
+      "unique_dst_ports_last_10s",
+      "tcp_attempts_last_10s",
+      "failed_tcp_connections_last_10s",
+      "failed_connection_rate_last_10s"
+    ],
+    "protocol_routing": [
+      "protocol"
+    ],
+    "redundant_excluded": [
+      "total_packet_count",
+      "total_bytes"
+    ]
+  },
+  "configuration": {
+    "byte_count_basis": "ipv4_total_length",
+    "icmp_idle_timeout_seconds": 10.0,
+    "not_applicable_integer": -1,
+    "source_history_window_seconds": 10,
+    "tcp_idle_timeout_seconds": 120.0,
+    "tcp_terminal_packet_policy": "retain terminal TCP tuples through trailing packets until a new bare SYN, idle timeout, or capture end",
+    "udp_idle_timeout_seconds": 30.0
+  },
+  "dataset_file": "flows_v2.csv",
+  "dataset_schema_version": 2,
+  "dataset_sha256": "d7894be67f10fb9a6e9e4fe8a6e80af54cab599229deab220275083d7269b51e",
+  "empty_capture_ids": [],
+  "extractor_version": "0.3.0",
+  "flow_feature_schema_version": 2,
+  "format": "csv",
+  "inputs": [
+    {
+      "capture_id": "normal_v2_002",
+      "filename": "../normal/normal_v2_002_tcp_spaced.pcap",
+      "flow_count": 10,
+      "sha256": "5220a48f78f0782558eb4469eb98f2559e36621d9b4213f816027cee0f8a55bd",
+      "size_bytes": 113040
+    },
+    {
+      "capture_id": "normal_v2_003",
+      "filename": "../normal/normal_v2_003_tcp_burst.pcap",
+      "flow_count": 15,
+      "sha256": "b098b198846f4f4df74cf1c7777b5129ea81b6007447e1878c205613c8f94223",
+      "size_bytes": 170778
+    },
+    {
+      "capture_id": "normal_v2_005",
+      "filename": "../normal/normal_v2_005_udp_spaced_retry.pcap",
+      "flow_count": 10,
+      "sha256": "91615a81c32d87ca24d554978fa5385ef0373787272aefa23c32b0cfc706de44",
+      "size_bytes": 2364
+    },
+    {
+      "capture_id": "normal_v2_006",
+      "filename": "../normal/normal_v2_006_udp_burst.pcap",
+      "flow_count": 15,
+      "sha256": "50a68b389dae6fec8ffbf154f8eb4a8ca5ba156b737fab65c50c9543e2aa5891",
+      "size_bytes": 3144
+    },
+    {
+      "capture_id": "normal_v2_007",
+      "filename": "../normal/normal_v2_007_icmp_spaced.pcap",
+      "flow_count": 10,
+      "sha256": "e63b82e63db21d2dae7adc922b5fc3a6b8ed4ea8efb0f0ba5a344cdd2aea9925",
+      "size_bytes": 3024
+    },
+    {
+      "capture_id": "normal_v2_008",
+      "filename": "../normal/normal_v2_008_icmp_burst.pcap",
+      "flow_count": 15,
+      "sha256": "3080c41ab7e6e5b724e8eb8280e208d1db101511de0feb3fcc41299cc9825c8e",
+      "size_bytes": 4164
+    },
+    {
+      "capture_id": "normal_v3_fit_001",
+      "filename": "../normal_v3/normal_v3_fit_001_mixed_low_rate.pcap",
+      "flow_count": 75,
+      "sha256": "c1cf32f299677c9c4da889d11681d231d1ced70ad23f44e469079ed1f4c185f4",
+      "size_bytes": 27259
+    },
+    {
+      "capture_id": "normal_v3_fit_002",
+      "filename": "../normal_v3/normal_v3_fit_002_mixed_grouped.pcap",
+      "flow_count": 75,
+      "sha256": "63adc6881b1b010a413bb11b28dcc85194fc0a11d8714d04d1d232e105c3fe26",
+      "size_bytes": 28269
+    },
+    {
+      "capture_id": "normal_v3_fit_003",
+      "filename": "../normal_v3/normal_v3_fit_003_mixed_bounded_burst.pcap",
+      "flow_count": 75,
+      "sha256": "021206bdeaa18b86cc682587d6c4f3d52f80310dd8861c9a7a4abd8108840473",
+      "size_bytes": 27296
+    },
+    {
+      "capture_id": "normal_v3_fit_004_retry1",
+      "filename": "../normal_v3/normal_v3_fit_004_retry1_mixed_multi_service.pcap",
+      "flow_count": 75,
+      "sha256": "5fdfeb46a9f0d1d37e5a5aa2ba5300d14ff410d5057df97b77a463059ad8a11f",
+      "size_bytes": 35067
+    },
+    {
+      "capture_id": "normal_v3_fit_005",
+      "filename": "../normal_v3/normal_v3_fit_005_mixed_operational_variation.pcap",
+      "flow_count": 77,
+      "sha256": "5cca7964eda9e9a6f46869b1460829d45bb125772c75db65c73ed00c2807ce3b",
+      "size_bytes": 28339
+    },
+    {
+      "capture_id": "normal_ssh_v4_fit_001_retry1",
+      "filename": "../../capture_campaign_normal_ssh_v4/normal_ssh_v4_fit_001_retry1.pcap",
+      "flow_count": 25,
+      "sha256": "9f8962ebbdb6df62fe274dc8bf20431dea4215f8d0e292bd44d15c45c572a771",
+      "size_bytes": 552388
+    },
+    {
+      "capture_id": "normal_ssh_v4_fit_002",
+      "filename": "../../capture_campaign_normal_ssh_v4/normal_ssh_v4_fit_002.pcap",
+      "flow_count": 25,
+      "sha256": "ab3d4fb87e22f1203219d903300256f6259ac27ed0e41bb808f7f43d5c6fda1e",
+      "size_bytes": 712382
+    },
+    {
+      "capture_id": "normal_ssh_v4_fit_003",
+      "filename": "../../capture_campaign_normal_ssh_v4/normal_ssh_v4_fit_003.pcap",
+      "flow_count": 25,
+      "sha256": "9968849da504f89566925e6cb48d53fa4bf01570bc2178dda00d032f27fe3875",
+      "size_bytes": 562704
+    },
+    {
+      "capture_id": "normal_ssh_v4_fit_004",
+      "filename": "../../capture_campaign_normal_ssh_v4/normal_ssh_v4_fit_004.pcap",
+      "flow_count": 25,
+      "sha256": "5a1197efb27819b536d46b637c841914b028e1f46c388be008e297c4ccb8a80f",
+      "size_bytes": 820030
+    },
+    {
+      "capture_id": "normal_v5_fit_001",
+      "filename": "../../capture_campaign_normal_v5/normal_v5_fit_001.pcap",
+      "flow_count": 75,
+      "sha256": "2ba8f4218c6bc5af492ef51c78e1615cdfbc78ae9a235a8da0a70c5914472271",
+      "size_bytes": 335350
+    },
+    {
+      "capture_id": "normal_v5_fit_002",
+      "filename": "../../capture_campaign_normal_v5/normal_v5_fit_002.pcap",
+      "flow_count": 75,
+      "sha256": "4391fa1f35541e6dcaa639d1cf5cb65a4772da5b7cafe7d2689dcab508c2cec0",
+      "size_bytes": 335382
+    },
+    {
+      "capture_id": "normal_v5_fit_003",
+      "filename": "../../capture_campaign_normal_v5/normal_v5_fit_003.pcap",
+      "flow_count": 75,
+      "sha256": "7ecb680f54504f2a7e056fa6b3ba153032a9888cbdc5f93f9eb9618520c83609",
+      "size_bytes": 341942
+    }
+  ],
+  "role_notes": {
+    "context_only": "Exported for debugging; never a learned input.",
+    "novelty_policy_inputs": "Saved inputs for explicit reason-coded checks; some also provide useful behavioral context.",
+    "protocol_routing": "Selects the protocol-specific model.",
+    "redundant_excluded": "Exported for auditability but excluded from learned matrices.",
+    "roles_may_overlap": true
+  },
+  "row_count": 777,
+  "source_history_schema_version": 2,
+  "source_manifest": "manifest_fit.csv",
+  "source_manifest_sha256": "2decd063f96947585e6bd9804fcd478fe901acc34ea313ea1bac5fccfc97be70"
+}

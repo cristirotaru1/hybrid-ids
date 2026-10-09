@@ -1,0 +1,2 @@
+schema_version,capture_id,filename,sha256,size_bytes,start_utc,end_utc,duration_seconds,packet_count,ipv4_count,ipv6_count,arp_count,tcp_count,udp_count,icmp_count,distinct_tcp_flows,distinct_udp_flows,distinct_icmp_flows,management_subnet_count,truncated_packet_count,interface,capture_filter,scenario_id,label,source_hosts,target_hosts,activity_notes,expected_actions,observed_actions,overlaps_capture_ids,validation_status
+2,,,,,,,,,,,,,,,,,,,,,,,,normal,,,,,,pending

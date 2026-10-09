@@ -1,0 +1,71 @@
+{
+  "artifacts": {
+    "scores_file": "evaluation_scores.csv",
+    "scores_sha256": "13b8e7df055f50d53d40c84d2935820d43730bc25996cbfc59a4e77d29618ac9"
+  },
+  "candidates": [
+    "v2_behavioral",
+    "v2_hybrid"
+  ],
+  "dataset": {
+    "file": "data/derived/v2/normal_v5_validation/flows_v2.csv",
+    "manifest_file": "data/derived/v2/normal_v5_validation/manifest_v2.json",
+    "manifest_sha256": "c0b082028bd0ce4db2d97da8cdb535ad676f0269a3d32c9a25f2857fbe8b2c78",
+    "row_count": 300,
+    "schema_version": 2,
+    "sha256": "d38044d7631c545d299051683e8d08157ea6ff4eb7d61e6f9491f45de4c6f740"
+  },
+  "decision": {
+    "behavioral": "anomaly_score > protocol_threshold",
+    "hybrid": "behavioral flag OR any semantic novelty reason",
+    "meaning": "flagged output denotes anomalous behavior, not proof of attack"
+  },
+  "metrics": {
+    "behavioral_flagged_count": 23,
+    "behavioral_flagged_fraction": 0.07666666666666666,
+    "by_capture": {
+      "normal_v5_val_001": {
+        "behavioral_flagged_count": 0,
+        "hybrid_flagged_count": 0,
+        "label": "normal",
+        "row_count": 75,
+        "scenario_id": "normal_v5_val_001"
+      },
+      "normal_v5_val_002": {
+        "behavioral_flagged_count": 5,
+        "hybrid_flagged_count": 5,
+        "label": "normal",
+        "row_count": 75,
+        "scenario_id": "normal_v5_val_002"
+      },
+      "normal_v5_val_003": {
+        "behavioral_flagged_count": 16,
+        "hybrid_flagged_count": 16,
+        "label": "normal",
+        "row_count": 75,
+        "scenario_id": "normal_v5_val_003"
+      },
+      "normal_v5_val_004": {
+        "behavioral_flagged_count": 2,
+        "hybrid_flagged_count": 2,
+        "label": "normal",
+        "row_count": 75,
+        "scenario_id": "normal_v5_val_004"
+      }
+    },
+    "hybrid_flagged_count": 23,
+    "hybrid_flagged_fraction": 0.07666666666666666,
+    "reason_counts": {
+      "behavioral_score_high": 23
+    },
+    "row_count": 300
+  },
+  "model": {
+    "file": "artifacts/isolation_forest_v2_v5_candidate_a/models.joblib",
+    "manifest_file": "artifacts/isolation_forest_v2_v5_candidate_a/model_manifest.json",
+    "manifest_sha256": "f57db2322b84df0d0748a4d625cc97c959e3550dc06fa8da19211e120e9530b9",
+    "sha256": "1538703a1c53782814d00c20e357c22b76f7850aef14c6058cbe5be20e723af0"
+  },
+  "model_version": 2,
+  "scoring_version": 2
+}

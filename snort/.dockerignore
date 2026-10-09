@@ -1,0 +1,7 @@
+snorty/
+libdaq/
+libdnet/
+*.pcap
+*.csv
+**/__pycache__/
+**/*.pyc

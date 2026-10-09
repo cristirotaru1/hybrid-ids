@@ -1,0 +1,57 @@
+# Secrets and deployment-local configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Virtual machines and installation media
+*.qcow2
+*.qcow
+*.vmdk
+*.vdi
+*.ova
+*.ovf
+*.iso
+
+# Python environments, caches, and packaging output
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+build/
+dist/
+
+# Runtime state
+*.db
+*.db-shm
+*.db-wal
+*.log
+*.lock
+alert_json.txt
+ids-ml/output/*
+!ids-ml/output/.gitignore
+
+# Local Snort source checkouts and compiled installation files. The container
+# image supplies Snort; only the versioned configuration under snorty/etc is
+# required by this repository.
+snort/libdaq/
+snort/libdnet/
+snort/snort3/
+snort/snorty/bin/
+snort/snorty/include/
+snort/snorty/lib/
+snort/snorty/share/
+snort/snorty/etc/snort/*
+!snort/snorty/etc/snort/test.lua
+snort/perf_monitor_base.csv
+snort/snorty/etc/perf_monitor_base.csv
+
+# Editor and operating-system files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db

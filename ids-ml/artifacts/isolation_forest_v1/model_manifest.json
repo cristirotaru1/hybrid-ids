@@ -1,0 +1,186 @@
+{
+  "artifacts": {
+    "model_file": "model.joblib",
+    "model_sha256": "6839ec2f6a5ff2d2cfd9dcc577bb259c5842a0caea078f05d3f64b79bd8be4af",
+    "scores_file": "model_development_scores.csv",
+    "scores_sha256": "06f927ea8c03111ddd159be5633e84c3c410788320cb22231bf7f03e7781bf36"
+  },
+  "dataset": {
+    "file": "flows_v1.csv",
+    "manifest_file": "manifest_v1.json",
+    "manifest_sha256": "75c09b3e6cef87ea7902f89101b10698eb3f0374fcaa1d8952585b45f950e710",
+    "schema_version": 1,
+    "sha256": "7f30808a0cc57becd79de8205c89334fc245f9cd3a724171fb4e0faa95dbbfe6"
+  },
+  "estimator": {
+    "bootstrap": false,
+    "class": "sklearn.ensemble.IsolationForest",
+    "contamination": "auto",
+    "max_samples": "auto",
+    "n_estimators": 300,
+    "n_jobs": 1,
+    "random_state": 42
+  },
+  "intended_use": "development-only normal-behavior baseline",
+  "limitation": "No anomalous or attack captures were used; these results do not measure attack-detection performance.",
+  "metrics": {
+    "legacy_normal_evaluation": {
+      "anomaly_score_maximum": 0.6677960775341008,
+      "anomaly_score_mean": 0.6366160722605722,
+      "anomaly_score_median": 0.6324487221410444,
+      "anomaly_score_minimum": 0.6168819436912656,
+      "provisional_flagged_count": 0,
+      "provisional_flagged_fraction": 0.0,
+      "row_count": 9
+    },
+    "normal_validation": {
+      "anomaly_score_maximum": 0.7043186607404908,
+      "anomaly_score_mean": 0.6137573820418761,
+      "anomaly_score_median": 0.6183629510137283,
+      "anomaly_score_minimum": 0.48702377280812637,
+      "provisional_flagged_count": 2,
+      "provisional_flagged_fraction": 0.06666666666666667,
+      "row_count": 30
+    },
+    "train": {
+      "anomaly_score_maximum": 0.6473805355299901,
+      "anomaly_score_mean": 0.5122967134190722,
+      "anomaly_score_median": 0.5029765497835876,
+      "anomaly_score_minimum": 0.4443375160684196,
+      "provisional_flagged_count": 0,
+      "provisional_flagged_fraction": 0.0,
+      "row_count": 75
+    }
+  },
+  "model_version": 1,
+  "preprocessing": {
+    "categorical_encoding": {
+      "dst_port": {
+        "0": "none",
+        "22": "ssh",
+        "9999": "lab_udp",
+        "other": "other"
+      },
+      "protocol": {
+        "1": "icmp",
+        "17": "udp",
+        "6": "tcp"
+      }
+    },
+    "constant_numeric_features_dropped_from_training": [
+      "rst_count",
+      "failed_connection_rate_last_10s"
+    ],
+    "metadata_excluded": [
+      "schema_version",
+      "extractor_version",
+      "capture_id",
+      "scenario_id",
+      "label",
+      "validation_status",
+      "interface",
+      "source_pcap",
+      "source_pcap_sha256",
+      "flow_id",
+      "flow_start_utc",
+      "flow_end_utc",
+      "src_ip",
+      "dst_ip",
+      "termination_reason"
+    ],
+    "model_features_excluded": [
+      "total_packet_count",
+      "total_bytes",
+      "src_port"
+    ],
+    "numeric_candidates": [
+      "flow_duration",
+      "forward_packet_count",
+      "backward_packet_count",
+      "forward_bytes",
+      "backward_bytes",
+      "mean_packet_size",
+      "std_packet_size",
+      "packets_per_second",
+      "bytes_per_second",
+      "syn_count",
+      "ack_count",
+      "rst_count",
+      "fin_count",
+      "inter_arrival_mean",
+      "inter_arrival_std",
+      "flows_last_10s",
+      "unique_dst_ips_last_10s",
+      "unique_dst_ports_last_10s",
+      "connection_rate_last_10s",
+      "failed_connection_rate_last_10s"
+    ],
+    "scaling": "none; Isolation Forest uses feature split ordering",
+    "transformed_feature_names": [
+      "flow_duration",
+      "forward_packet_count",
+      "backward_packet_count",
+      "forward_bytes",
+      "backward_bytes",
+      "mean_packet_size",
+      "std_packet_size",
+      "packets_per_second",
+      "bytes_per_second",
+      "syn_count",
+      "ack_count",
+      "fin_count",
+      "inter_arrival_mean",
+      "inter_arrival_std",
+      "flows_last_10s",
+      "unique_dst_ips_last_10s",
+      "unique_dst_ports_last_10s",
+      "connection_rate_last_10s",
+      "protocol_icmp",
+      "protocol_tcp",
+      "protocol_udp",
+      "dst_port_none",
+      "dst_port_ssh",
+      "dst_port_lab_udp",
+      "dst_port_other"
+    ]
+  },
+  "software": {
+    "joblib": "1.5.3",
+    "numpy": "2.5.2",
+    "python": "3.14.6",
+    "scikit_learn": "1.9.0"
+  },
+  "split": {
+    "legacy_normal_evaluation_capture_ids": [
+      "normal_002_ssh",
+      "normal_003_ping",
+      "normal_004_udp",
+      "normal_005_mixed",
+      "normal_test_001"
+    ],
+    "method": "capture-based; no random row split",
+    "normal_validation_capture_ids": [
+      "normal_v2_009"
+    ],
+    "row_counts": {
+      "legacy_normal_evaluation": 9,
+      "normal_validation": 30,
+      "train": 75
+    },
+    "train_capture_ids": [
+      "normal_v2_002",
+      "normal_v2_003",
+      "normal_v2_005",
+      "normal_v2_006",
+      "normal_v2_007",
+      "normal_v2_008"
+    ]
+  },
+  "threshold": {
+    "anomaly_score_threshold": 0.6987829279266998,
+    "definition": "95th percentile of anomaly scores on the normal-validation capture",
+    "flag_rule": "anomaly_score > threshold",
+    "status": "provisional",
+    "target_normal_false_positive_fraction": 0.05
+  }
+}

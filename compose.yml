@@ -1,0 +1,209 @@
+name: ids
+
+services:
+  snort:
+    build:
+      context: ./snort
+      dockerfile: Dockerfile
+    user: root
+    container_name: snort
+    restart: unless-stopped
+    network_mode: host
+    privileged: true
+    working_dir: /home/snorty
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    volumes:
+      - ./snort/snorty/etc/snort/test.lua:/home/snorty/etc/snort/test.lua:ro
+      - ./snort/snorty/etc/rules:/home/snorty/etc/rules
+      - /var/log/snort:/var/log/snort
+    env_file:
+      - ./snort/agent/.env
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://127.0.0.1:8080/status"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+
+  node_exporter:
+    image: prom/node-exporter:latest
+    container_name: node_exporter
+    pid: "service:snort"
+    network_mode: "service:snort"
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+    command:
+      - --path.procfs=/host/proc
+      - --path.sysfs=/host/sys
+      - --collector.filesystem.ignored-mount-points=^/(sys|proc|dev|host|etc)($$|/)
+    restart: unless-stopped
+    depends_on:
+      snort:
+        condition: service_started
+
+  perf_exporter:
+    image: python:3.11-slim
+    container_name: perf_exporter
+    command: >-
+      sh -c "pip install prometheus-client -q && python /app/perf_exporter.py"
+    volumes:
+      - /var/log/snort:/var/log/snort:ro
+      - ./snort/perf_exporter/perf_exporter.py:/app/perf_exporter.py:ro
+    network_mode: "service:snort"
+    restart: unless-stopped
+    depends_on:
+      snort:
+        condition: service_started
+
+  flask:
+    build:
+      context: .
+      dockerfile: flask/Dockerfile
+    container_name: flask-rules
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./snort/snorty/etc/rules:/app/etc/rules
+      - /var/lib/reaction:/var/lib/reaction
+    environment:
+      RULES_DIR: /app/etc/rules
+      RULES_FILE: ${RULES_FILE:-test.rules}
+      SNORT_AGENT_URL: http://${LAB_HOST_IP}:8080
+      FLOODLIGHT_HOST: ${FLOODLIGHT_HOST}
+      FLOODLIGHT_PORT: ${FLOODLIGHT_PORT:-8080}
+      SWITCH_DPID: ${SWITCH_DPID}
+      SWITCH_NAME: ${SWITCH_NAME:-lab-switch}
+      SWITCH_CIDR: ${SWITCH_CIDR:-10.10.0.0/24}
+      REACTION_DB_PATH: /var/lib/reaction/reaction.db
+      REACT_DRY_RUN: ${REACT_DRY_RUN:-true}
+    networks:
+      - ids-net
+    depends_on:
+      snort:
+        condition: service_healthy
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - "import urllib.request; urllib.request.urlopen('http://127.0.0.1:5000/health', timeout=3)"
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  reaction:
+    build:
+      context: .
+      dockerfile: reaction-service/Dockerfile
+    container_name: reaction
+    restart: unless-stopped
+    env_file:
+      - ./.env
+    volumes:
+      - /var/log/snort:/var/log/snort:ro
+      - /var/lib/reaction:/var/lib/reaction
+    environment:
+      ALERT_FILE: /var/log/snort/alert_json.txt
+      REACTION_DB_PATH: /var/lib/reaction/reaction.db
+      CONFIRM_BASE_URL: http://${LAB_HOST_IP}:5000
+    networks:
+      - ids-net
+    depends_on:
+      flask:
+        condition: service_healthy
+
+  loki:
+    image: grafana/loki:3.7.0
+    container_name: loki
+    user: "0"
+    ports:
+      - "3100:3100"
+      - "9096:9096"
+    command: -config.file=/etc/loki/loki-config.yaml
+    volumes:
+      - ./grafana/loki/loki-config.yaml:/etc/loki/loki-config.yaml:ro
+      - loki-data:/var/lib/loki
+    networks:
+      - ids-net
+    restart: unless-stopped
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --web.enable-remote-write-receiver
+      - --storage.tsdb.retention.time=15d
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus-data:/prometheus
+    networks:
+      - ids-net
+    restart: unless-stopped
+
+  alloy:
+    image: grafana/alloy:latest
+    container_name: alloy
+    ports:
+      - "12345:12345"
+    command:
+      - run
+      - /etc/alloy/config.alloy
+      - --server.http.listen-addr=0.0.0.0:12345
+    volumes:
+      - ./grafana/alloy/config.alloy:/etc/alloy/config.alloy:ro
+      - /var/log/snort:/var/log/snort:ro
+      - ./ids-ml/output:/var/log/ids-ml:ro
+    networks:
+      - ids-net
+    depends_on:
+      - loki
+      - prometheus
+    restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./.env
+    environment:
+      GF_INSTALL_PLUGINS: yesoreyeram-infinity-datasource,volkovlabs-form-panel
+      TZ: Europe/Bucharest
+      GF_SMTP_ENABLED: "true"
+      GF_SMTP_HOST: "smtp.gmail.com:465"
+      GF_SMTP_USER: "${SMTP_USER}"
+      GF_SMTP_PASSWORD: "${SMTP_PASSWORD}"
+      GF_SMTP_FROM_ADDRESS: "${EMAIL_FROM}"
+      GF_SMTP_FROM_NAME: "IDS Grafana"
+      GF_SMTP_SKIP_VERIFY: "false"
+      GF_SERVER_ROOT_URL: "http://${LAB_HOST_IP}:3000"
+      GF_SERVER_DOMAIN: "${LAB_HOST_IP}"
+    volumes:
+      - grafana-storage:/var/lib/grafana
+    networks:
+      - ids-net
+    depends_on:
+      - loki
+      - prometheus
+    restart: unless-stopped
+
+volumes:
+  grafana-storage:
+    name: grafana_grafana-storage
+  loki-data:
+    name: grafana_loki-data
+  prometheus-data:
+    name: prometheus_prometheus_data
+
+networks:
+  ids-net:
+    name: ids-net

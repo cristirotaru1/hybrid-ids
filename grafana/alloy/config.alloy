@@ -1,0 +1,115 @@
+// Getting alerts from alert_json.txt using alloy + loki
+
+local.file_match "snort" {
+  path_targets = [
+    {
+      __path__ = "/var/log/snort/alert_json.txt",
+      job      = "snort",
+      host     = "snort-sensor-1",
+    },
+  ]
+}
+
+loki.source.file "snort" {
+  targets    = local.file_match.snort.targets
+  forward_to = [loki.process.snort.receiver]
+}
+
+loki.process "snort" {
+  stage.json {
+    expressions = {
+      priority  = "priority",
+      classtype = "class",
+      proto     = "proto",
+      action    = "action",
+    }
+  }
+
+  stage.labels {
+    // empty value = use the extracted field of the same name
+    values = {
+      priority  = "",
+      classtype = "",
+      proto     = "",
+      action    = "",
+    }
+  }
+
+  forward_to = [loki.write.default.receiver]
+}
+
+local.file_match "ids_ml_replay" {
+  path_targets = [
+    {
+      __path__ = "/var/log/ids-ml/replay_scores.jsonl",
+      job      = "ids_ml_replay",
+      host     = "snort-sensor-1",
+    },
+  ]
+}
+
+loki.source.file "ids_ml_replay" {
+  targets    = local.file_match.ids_ml_replay.targets
+  forward_to = [loki.process.ids_ml_replay.receiver]
+}
+
+loki.process "ids_ml_replay" {
+  stage.json {
+    expressions = {
+      event_type = "event_type",
+      protocol   = "protocol",
+      anomaly    = "hybrid_anomaly_flag",
+      status     = "status",
+      model      = "model",
+      capture_id = "capture_id",
+      scenario_id = "scenario_id",
+    }
+  }
+
+  stage.labels {
+    values = {
+      event_type = "",
+      protocol   = "",
+      anomaly    = "",
+      status     = "",
+      model      = "",
+      capture_id = "",
+      scenario_id = "",
+    }
+  }
+
+  forward_to = [loki.write.default.receiver]
+}
+
+loki.write "default" {
+  endpoint {
+    url = "http://loki:3100/loki/api/v1/push"
+  }
+}
+
+prometheus.scrape "snort_host" {
+  targets = [
+    {"__address__" = "172.17.0.1:9100", "host" = "snort-sensor-1", "job" = "snort_host"},
+  ]
+  forward_to = [prometheus.remote_write.default.receiver]
+}
+
+prometheus.scrape "snort_perf" {
+  targets = [
+    {"__address__" = "172.17.0.1:9101", "job" = "snort_perf", "host" = "snort-sensor-1"},
+  ]
+  forward_to = [prometheus.remote_write.default.receiver]
+}
+
+prometheus.scrape "alloy_self" {
+  targets = [
+    {"__address__" = "alloy:12345", "job" = "alloy"},
+  ]
+  forward_to = [prometheus.remote_write.default.receiver]
+}
+
+prometheus.remote_write "default" {
+  endpoint {
+    url = "http://prometheus:9090/api/v1/write"
+  }
+}

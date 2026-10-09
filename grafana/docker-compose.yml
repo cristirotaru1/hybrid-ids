@@ -1,0 +1,93 @@
+services:
+  loki:
+    image: grafana/loki:3.7.0
+    container_name: loki
+    user: "0"
+    ports:
+      - 3100:3100
+      - 9096:9096
+    command: -config.file=/etc/loki/loki-config.yaml
+    volumes:
+      - ./loki/loki-config.yaml:/etc/loki/loki-config.yaml:ro
+      - loki-data:/var/lib/loki
+    networks: [ids-net]
+    restart: unless-stopped
+
+  alloy:
+    image: grafana/alloy:latest
+    container_name: alloy
+    ports:
+      - 12345:12345
+    command:
+      - run
+      - /etc/alloy/config.alloy
+      - --server.http.listen-addr=0.0.0.0:12345
+    volumes:
+      - ./alloy/config.alloy:/etc/alloy/config.alloy:ro
+      - /var/log/snort:/var/log/snort:ro
+    networks: [ids-net]
+    depends_on: [loki]
+    restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    ports:
+      - 3000:3000
+    environment:
+      - GF_INSTALL_PLUGINS=yesoreyeram-infinity-datasource,volkovlabs-form-panel
+    volumes:
+      - grafana-storage:/var/lib/grafana
+    networks: [ids-net]
+    depends_on: [loki]
+    restart: unless-stopped
+
+  reaction:
+    build:
+      context: ..
+      dockerfile: reaction-service/Dockerfile
+    container_name: reaction
+    restart: unless-stopped
+    volumes:
+      - /var/log/snort:/var/log/snort:ro              # read alert_json.txt
+      - /var/log/reaction:/var/log/reaction            # shared with Flask backend
+      - /var/lib/reaction:/var/lib/reaction
+    environment:
+      # --- SMTP2GO ---
+      SMTP_HOST:          "mail.smtp2go.com"
+      SMTP_PORT:           "2525"
+      SMTP_USER:           "${SMTP2GO_USERNAME}"        # set in .env, do not hardcode
+      SMTP_PASSWORD:       "${SMTP2GO_PASSWORD}"        # set in .env, do not hardcode
+      EMAIL_FROM:          "alerts@yourdomain.com"       # must be a verified sender in SMTP2GO
+      EMAIL_TO:            "operator@yourdomain.com"
+
+      # --- Flask backend (confirm link target) ---
+      CONFIRM_BASE_URL:    "http://192.168.122.13:5000"
+
+      # --- Shared file paths (must match Flask backend's mounts) ---
+      ALERT_FILE:          "/var/log/snort/alert_json.txt"
+      REACTION_DB_PATH:    "/var/lib/reaction/reaction.db"
+
+      # --- Current lab switch ---
+      FLOODLIGHT_HOST:     "192.168.122.10"
+      FLOODLIGHT_PORT:     "8080"
+      SWITCH_NAME:         "lab-switch"
+      SWITCH_DPID:         "0000005000000401"
+      SWITCH_CIDR:         "10.10.0.0/24"
+
+      # --- Tuning ---
+      COOLDOWN_SECONDS:    "60"
+      TOKEN_TTL_SECONDS:   "3600"
+      LOG_LEVEL:           "INFO"
+      EMAIL_ATTEMPTS:      "3"
+    networks: [ids-net]
+
+
+
+volumes:
+  grafana-storage:
+  loki-data:
+
+networks:
+  ids-net:
+    external: true

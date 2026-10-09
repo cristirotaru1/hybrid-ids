@@ -1,0 +1,7 @@
+component,exact_version,eve_ng_image_folder,source_url,sha256,minimum_vcpu,minimum_ram_mb,minimum_disk_gb,verification_status
+EVE-NG,RECORD_BEFORE_RELEASE,,OFFICIAL_SOURCE_REQUIRED,RECORD_BEFORE_RELEASE,,,,pending
+Kali Linux,RECORD_BEFORE_RELEASE,RECORD_BEFORE_RELEASE,OFFICIAL_SOURCE_REQUIRED,RECORD_BEFORE_RELEASE,,,,pending
+Debian target,Debian 12,RECORD_BEFORE_RELEASE,https://www.debian.org/distrib/,RECORD_BEFORE_RELEASE,,,,pending
+Debian IDS,Debian 12,RECORD_BEFORE_RELEASE,https://www.debian.org/distrib/,RECORD_BEFORE_RELEASE,,,,pending
+Floodlight,RECORD_BEFORE_RELEASE,RECORD_BEFORE_RELEASE,https://github.com/floodlight/floodlight,RECORD_BEFORE_RELEASE,,,,pending
+Open vSwitch,RECORD_BEFORE_RELEASE,RECORD_BEFORE_RELEASE,https://www.openvswitch.org/,RECORD_BEFORE_RELEASE,,,,pending

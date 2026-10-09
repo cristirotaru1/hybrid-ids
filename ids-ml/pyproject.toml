@@ -1,0 +1,48 @@
+[build-system]
+requires = ["setuptools==80.9.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ids-flow-extractor"
+version = "0.1.0"
+description = "Deterministic offline network-flow feature extraction for the IDS project"
+readme = "README.md"
+requires-python = ">=3.11,<3.15"
+dependencies = [
+    "joblib==1.5.3",
+    "numpy==2.5.2",
+    "scapy==2.7.0",
+    "scikit-learn==1.9.0",
+    "scipy==1.18.1",
+]
+
+[project.scripts]
+ids-export-dataset = "ids_ml.dataset:main"
+ids-export-dataset-v2 = "ids_ml.dataset_v2:main"
+ids-check-quality = "ids_ml.quality:main"
+ids-score-dataset = "ids_ml.scoring:main"
+ids-score-dataset-v2 = "ids_ml.scoring_v2:main"
+ids-train-isolation-forest = "ids_ml.modeling:main"
+ids-train-isolation-forest-v2 = "ids_ml.modeling_v2:main"
+ids-replay-pcap = "ids_ml.replay:main"
+
+[project.optional-dependencies]
+dev = [
+    "pytest==9.1.1",
+    "ruff==0.16.2",
+]
+
+[tool.pytest.ini_options]
+addopts = "-ra"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 88
+src = ["src", "tests"]
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]
+
+[tool.setuptools.packages.find]
+where = ["src"]

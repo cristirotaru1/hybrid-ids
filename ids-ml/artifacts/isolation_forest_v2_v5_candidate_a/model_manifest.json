@@ -1,0 +1,413 @@
+{
+  "artifacts": {
+    "model_file": "models.joblib",
+    "model_sha256": "1538703a1c53782814d00c20e357c22b76f7850aef14c6058cbe5be20e723af0",
+    "scores_file": "model_development_scores.csv",
+    "scores_sha256": "079834e0bfdeb3e2a806a58b12f625087beb59c7d1c48976aa9c76c59d56a042"
+  },
+  "candidate": "v2_behavioral",
+  "datasets": {
+    "calibration": {
+      "extractor_version": "0.3.0",
+      "file": "data/derived/v2/model_v2_v5_calibration/flows_v2.csv",
+      "manifest_file": "data/derived/v2/model_v2_v5_calibration/manifest_v2.json",
+      "manifest_sha256": "256c5e29f6f2b3348eea4b0cc06dc4b3244198a29685acb69ba030bf844b7c1a",
+      "schema_version": 2,
+      "sha256": "e12f1ac8b2277368f96b7abf8187250ba4db618c10094c886f7da6f75f6082d2",
+      "source_manifest_sha256": "84733fcf79b5ff827a30217c93ba9200ae4eb4bc3ff7f8aeaf52c7ed39129f8e"
+    },
+    "fit": {
+      "extractor_version": "0.3.0",
+      "file": "data/derived/v2/model_v2_v5_fit/flows_v2.csv",
+      "manifest_file": "data/derived/v2/model_v2_v5_fit/manifest_v2.json",
+      "manifest_sha256": "9aac142dec3a92b75633bf8c2e57fa847d2bdc3d4136d5987a9bb0c0a76ef64d",
+      "schema_version": 2,
+      "sha256": "d7894be67f10fb9a6e9e4fe8a6e80af54cab599229deab220275083d7269b51e",
+      "source_manifest_sha256": "2decd063f96947585e6bd9804fcd478fe901acc34ea313ea1bac5fccfc97be70"
+    }
+  },
+  "estimator": {
+    "bootstrap": false,
+    "class": "sklearn.ensemble.IsolationForest",
+    "contamination": "auto",
+    "max_samples": "auto",
+    "n_estimators": 300,
+    "n_jobs": 1,
+    "random_state": 42,
+    "scaling": "none"
+  },
+  "feature_profile": {
+    "description": "Current schema-v2 behavioral contract.",
+    "excluded_by_protocol": {
+      "icmp": [],
+      "tcp": [],
+      "udp": []
+    },
+    "name": "current"
+  },
+  "known_destination_services": {
+    "definition": "positive TCP/UDP destination ports intentionally observed in accepted normal fit or calibration, including isolated normal operational failures",
+    "normal_failed_tcp_ports_included": [
+      65000
+    ],
+    "services_by_protocol": {
+      "tcp": [
+        22,
+        8080,
+        65000
+      ],
+      "udp": [
+        9999,
+        10000
+      ]
+    }
+  },
+  "limitation": "Normal-only fitting and calibration do not measure anomalous-scenario detection. Semantic novelty rules are not part of this candidate.",
+  "metrics": {
+    "icmp": {
+      "calibration": {
+        "anomaly_score_maximum": 0.6313344575531457,
+        "anomaly_score_mean": 0.41843431480845594,
+        "anomaly_score_median": 0.40368475703369205,
+        "anomaly_score_minimum": 0.35403372149284223,
+        "flagged_count": 9,
+        "flagged_counts_by_capture": {
+          "normal_v3_cal_001_retry1": 1,
+          "normal_v3_cal_004": 1,
+          "normal_v5_cal_003": 7
+        },
+        "flagged_fraction": 0.05142857142857143,
+        "row_count": 175
+      },
+      "fit": {
+        "anomaly_score_maximum": 0.7280051832279353,
+        "anomaly_score_mean": 0.4315493738980697,
+        "anomaly_score_median": 0.40870317458426175,
+        "anomaly_score_minimum": 0.35412490948804176,
+        "flagged_count": 28,
+        "flagged_counts_by_capture": {
+          "normal_v2_007": 5,
+          "normal_v2_008": 2,
+          "normal_v3_fit_002": 1,
+          "normal_v3_fit_003": 9,
+          "normal_v3_fit_004_retry1": 1,
+          "normal_v5_fit_002": 1,
+          "normal_v5_fit_003": 9
+        },
+        "flagged_fraction": 0.12444444444444444,
+        "row_count": 225
+      }
+    },
+    "tcp": {
+      "calibration": {
+        "anomaly_score_maximum": 0.7213766376071158,
+        "anomaly_score_mean": 0.4419366740604632,
+        "anomaly_score_median": 0.42335950064776096,
+        "anomaly_score_minimum": 0.38166415412522264,
+        "flagged_count": 13,
+        "flagged_counts_by_capture": {
+          "normal_ssh_v4_cal_003": 4,
+          "normal_v3_cal_003": 5,
+          "normal_v3_cal_004": 3,
+          "normal_v5_cal_003": 1
+        },
+        "flagged_fraction": 0.052,
+        "row_count": 250
+      },
+      "fit": {
+        "anomaly_score_maximum": 0.7407690606287572,
+        "anomaly_score_mean": 0.45518157886601496,
+        "anomaly_score_median": 0.44151660703776996,
+        "anomaly_score_minimum": 0.3815720913593283,
+        "flagged_count": 22,
+        "flagged_counts_by_capture": {
+          "normal_ssh_v4_fit_002": 1,
+          "normal_ssh_v4_fit_003": 3,
+          "normal_ssh_v4_fit_004": 3,
+          "normal_v3_fit_002": 1,
+          "normal_v3_fit_003": 9,
+          "normal_v3_fit_004_retry1": 3,
+          "normal_v3_fit_005": 2
+        },
+        "flagged_fraction": 0.0672782874617737,
+        "row_count": 327
+      }
+    },
+    "udp": {
+      "calibration": {
+        "anomaly_score_maximum": 0.6075803663794955,
+        "anomaly_score_mean": 0.4251544909946457,
+        "anomaly_score_median": 0.4098270384381488,
+        "anomaly_score_minimum": 0.3540872628061004,
+        "flagged_count": 9,
+        "flagged_counts_by_capture": {
+          "normal_v3_cal_001_retry1": 1,
+          "normal_v3_cal_002": 4,
+          "normal_v5_cal_002": 1,
+          "normal_v5_cal_003": 3
+        },
+        "flagged_fraction": 0.05142857142857143,
+        "row_count": 175
+      },
+      "fit": {
+        "anomaly_score_maximum": 0.6338245626008254,
+        "anomaly_score_mean": 0.43076692487585294,
+        "anomaly_score_median": 0.410046528163993,
+        "anomaly_score_minimum": 0.35418704848357063,
+        "flagged_count": 20,
+        "flagged_counts_by_capture": {
+          "normal_v2_005": 5,
+          "normal_v2_006": 3,
+          "normal_v3_fit_001": 1,
+          "normal_v3_fit_003": 5,
+          "normal_v3_fit_004_retry1": 1,
+          "normal_v3_fit_005": 1,
+          "normal_v5_fit_002": 1,
+          "normal_v5_fit_003": 3
+        },
+        "flagged_fraction": 0.08888888888888889,
+        "row_count": 225
+      }
+    }
+  },
+  "model_version": 2,
+  "novelty_policy": {
+    "boundary_provenance": "strict maximum observed across accepted normal fit and calibration rows",
+    "comparison": "numeric novelty is flagged only when value > boundary",
+    "known_destination_services": {
+      "tcp": [
+        22,
+        8080,
+        65000
+      ],
+      "udp": [
+        9999,
+        10000
+      ]
+    },
+    "numeric_upper_boundaries_by_protocol": {
+      "icmp": {
+        "same_protocol_flows_last_10s": 24.0,
+        "unique_dst_ips_last_10s": 1.0,
+        "unique_dst_ports_last_10s": 4.0
+      },
+      "tcp": {
+        "same_protocol_flows_last_10s": 24.0,
+        "unique_dst_ips_last_10s": 1.0,
+        "unique_dst_ports_last_10s": 4.0
+      },
+      "udp": {
+        "same_protocol_flows_last_10s": 24.0,
+        "unique_dst_ips_last_10s": 1.0,
+        "unique_dst_ports_last_10s": 4.0
+      }
+    },
+    "policy_version": 1,
+    "seen_icmp_type_codes": [
+      [
+        8,
+        0
+      ]
+    ],
+    "tcp_failure_burst": {
+      "definition": "current_tcp_failed + failed_tcp_connections_last_10s >= 2 and current_tcp_failed == 1",
+      "minimum_failures_including_current": 2
+    }
+  },
+  "protocol_models": {
+    "icmp": {
+      "anomaly_threshold": 0.5234066844461838,
+      "behavioral_candidate_features": [
+        "flow_duration",
+        "forward_packet_count",
+        "backward_packet_count",
+        "forward_bytes",
+        "backward_bytes",
+        "mean_packet_size",
+        "std_packet_size",
+        "packets_per_second",
+        "bytes_per_second",
+        "inter_arrival_mean",
+        "inter_arrival_std",
+        "flows_last_10s",
+        "unique_dst_ips_last_10s",
+        "unique_dst_ports_last_10s",
+        "connection_rate_last_10s",
+        "same_protocol_flows_last_10s"
+      ],
+      "constant_features_dropped": [
+        "forward_packet_count",
+        "backward_packet_count",
+        "std_packet_size",
+        "inter_arrival_std"
+      ],
+      "feature_profile_exclusions": [],
+      "learned_features": [
+        "flow_duration",
+        "forward_bytes",
+        "backward_bytes",
+        "mean_packet_size",
+        "packets_per_second",
+        "bytes_per_second",
+        "inter_arrival_mean",
+        "flows_last_10s",
+        "unique_dst_ips_last_10s",
+        "unique_dst_ports_last_10s",
+        "connection_rate_last_10s",
+        "same_protocol_flows_last_10s"
+      ],
+      "protocol_number": 1
+    },
+    "tcp": {
+      "anomaly_threshold": 0.5427071194303716,
+      "behavioral_candidate_features": [
+        "flow_duration",
+        "forward_packet_count",
+        "backward_packet_count",
+        "forward_bytes",
+        "backward_bytes",
+        "mean_packet_size",
+        "std_packet_size",
+        "packets_per_second",
+        "bytes_per_second",
+        "inter_arrival_mean",
+        "inter_arrival_std",
+        "flows_last_10s",
+        "unique_dst_ips_last_10s",
+        "unique_dst_ports_last_10s",
+        "connection_rate_last_10s",
+        "same_protocol_flows_last_10s",
+        "syn_count",
+        "ack_count",
+        "fin_count"
+      ],
+      "constant_features_dropped": [],
+      "feature_profile_exclusions": [],
+      "learned_features": [
+        "flow_duration",
+        "forward_packet_count",
+        "backward_packet_count",
+        "forward_bytes",
+        "backward_bytes",
+        "mean_packet_size",
+        "std_packet_size",
+        "packets_per_second",
+        "bytes_per_second",
+        "inter_arrival_mean",
+        "inter_arrival_std",
+        "flows_last_10s",
+        "unique_dst_ips_last_10s",
+        "unique_dst_ports_last_10s",
+        "connection_rate_last_10s",
+        "same_protocol_flows_last_10s",
+        "syn_count",
+        "ack_count",
+        "fin_count"
+      ],
+      "protocol_number": 6
+    },
+    "udp": {
+      "anomaly_threshold": 0.5340333394866514,
+      "behavioral_candidate_features": [
+        "flow_duration",
+        "forward_packet_count",
+        "backward_packet_count",
+        "forward_bytes",
+        "backward_bytes",
+        "mean_packet_size",
+        "std_packet_size",
+        "packets_per_second",
+        "bytes_per_second",
+        "inter_arrival_mean",
+        "inter_arrival_std",
+        "flows_last_10s",
+        "unique_dst_ips_last_10s",
+        "unique_dst_ports_last_10s",
+        "connection_rate_last_10s",
+        "same_protocol_flows_last_10s"
+      ],
+      "constant_features_dropped": [
+        "forward_packet_count",
+        "backward_packet_count",
+        "std_packet_size",
+        "inter_arrival_std"
+      ],
+      "feature_profile_exclusions": [],
+      "learned_features": [
+        "flow_duration",
+        "forward_bytes",
+        "backward_bytes",
+        "mean_packet_size",
+        "packets_per_second",
+        "bytes_per_second",
+        "inter_arrival_mean",
+        "flows_last_10s",
+        "unique_dst_ips_last_10s",
+        "unique_dst_ports_last_10s",
+        "connection_rate_last_10s",
+        "same_protocol_flows_last_10s"
+      ],
+      "protocol_number": 17
+    }
+  },
+  "software": {
+    "joblib": "1.5.3",
+    "numpy": "2.5.2",
+    "python": "3.14.7",
+    "scikit_learn": "1.9.0"
+  },
+  "split": {
+    "calibration_capture_ids": [
+      "normal_v3_cal_001_retry1",
+      "normal_v3_cal_002",
+      "normal_v3_cal_003",
+      "normal_v3_cal_004",
+      "normal_ssh_v4_cal_001",
+      "normal_ssh_v4_cal_002",
+      "normal_ssh_v4_cal_003",
+      "normal_v5_cal_001",
+      "normal_v5_cal_002",
+      "normal_v5_cal_003"
+    ],
+    "fit_capture_ids": [
+      "normal_v2_002",
+      "normal_v2_003",
+      "normal_v2_005",
+      "normal_v2_006",
+      "normal_v2_007",
+      "normal_v2_008",
+      "normal_v3_fit_001",
+      "normal_v3_fit_002",
+      "normal_v3_fit_003",
+      "normal_v3_fit_004_retry1",
+      "normal_v3_fit_005",
+      "normal_ssh_v4_fit_001_retry1",
+      "normal_ssh_v4_fit_002",
+      "normal_ssh_v4_fit_003",
+      "normal_ssh_v4_fit_004",
+      "normal_v5_fit_001",
+      "normal_v5_fit_002",
+      "normal_v5_fit_003"
+    ],
+    "method": "capture-based; no random row split",
+    "row_counts_by_protocol": {
+      "calibration": {
+        "icmp": 175,
+        "tcp": 250,
+        "udp": 175
+      },
+      "fit": {
+        "icmp": 225,
+        "tcp": 327,
+        "udp": 225
+      }
+    }
+  },
+  "status": "development-only",
+  "threshold": {
+    "definition": "95th percentile of independent normal calibration scores",
+    "flag_rule": "anomaly_score > protocol_threshold",
+    "quantile_method": "linear",
+    "target_normal_false_positive_fraction": 0.05
+  }
+}

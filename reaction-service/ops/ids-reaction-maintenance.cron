@@ -1,0 +1,5 @@
+# Install as /etc/cron.d/ids-reaction-maintenance on the IDS VM.
+# Daily at 03:15 in the VM's timezone. Prevent overlapping maintenance runs.
+SHELL=/bin/sh
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+15 3 * * * root /usr/bin/flock -n /run/lock/ids-reaction-maintenance.lock /usr/local/sbin/ids-reaction-maintenance >> /var/log/ids-reaction-maintenance.log 2>&1

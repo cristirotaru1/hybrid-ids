@@ -1,0 +1,46 @@
+services:
+  snort:
+    build: .
+    user: root
+    container_name: snort
+    restart: unless-stopped
+    # Host network mode is required for packet capture
+    network_mode: host
+    privileged: true
+    working_dir: /home/snorty
+    cap_add:
+      - NET_ADMIN     # Required for promiscuous mode
+      - NET_RAW       # Required for raw packet capture
+    volumes:
+      - ./snorty/etc/snort/test.lua:/home/snorty/etc/snort/test.lua:ro
+      - ./snorty/etc/rules:/home/snorty/etc/rules
+      - /var/log/snort:/var/log/snort
+    env_file:
+      - agent/.env
+
+  node_exporter:
+    image: prom/node-exporter:latest
+    container_name: node_exporter
+    pid: "service:snort"
+    network_mode: "service:snort"
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+    command:
+      - --path.procfs=/host/proc
+      - --path.sysfs=/host/sys
+      - --collector.filesystem.ignored-mount-points=^/(sys|proc|dev|host|etc)($$|/)
+    restart: unless-stopped
+    depends_on: [snort]
+
+  perf_exporter:
+    image: python:3.11-slim
+    container_name: perf_exporter
+    command: >
+      sh -c "pip install prometheus-client -q && python /app/perf_exporter.py"
+    volumes:
+      - /var/log/snort:/var/log/snort:ro
+      - ./perf_exporter/perf_exporter.py:/app/perf_exporter.py:ro
+    network_mode: "service:snort"
+    restart: unless-stopped
+    depends_on: [snort]

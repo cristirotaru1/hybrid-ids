@@ -1,0 +1,21 @@
+services:
+  flask:
+    build:
+      context: ..
+      dockerfile: flask/Dockerfile
+    container_name: flask-rules
+    restart: unless-stopped
+    ports:
+      - 5000:5000
+    volumes:
+      - ~/snort/snorty/etc/rules:/app/etc/rules
+      - /var/log/reaction:/var/log/reaction
+      - /var/lib/reaction:/var/lib/reaction
+    env_file:
+      - .env
+    networks:
+      - ids-net
+
+networks:
+  ids-net:
+    external: true

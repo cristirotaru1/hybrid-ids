@@ -1,0 +1,450 @@
+{
+  "capture_counts": {
+    "normal_002_ssh": 1,
+    "normal_003_ping": 3,
+    "normal_004_udp": 1,
+    "normal_005_mixed": 3,
+    "normal_test_001": 1,
+    "normal_v2_002": 10,
+    "normal_v2_003": 15,
+    "normal_v2_005": 10,
+    "normal_v2_006": 15,
+    "normal_v2_007": 10,
+    "normal_v2_008": 15,
+    "normal_v2_009": 30
+  },
+  "constant_features": [
+    "rst_count",
+    "failed_connection_rate_last_10s"
+  ],
+  "dataset_file": "flows_v1.csv",
+  "dataset_schema_version": 1,
+  "dataset_sha256": "7f30808a0cc57becd79de8205c89334fc245f9cd3a724171fb4e0faa95dbbfe6",
+  "duplicate_flow_ids": [],
+  "duplicate_model_row_count": 0,
+  "empty_capture_ids": [
+    "normal_001_idle",
+    "normal_v2_010"
+  ],
+  "errors": [],
+  "exact_relationships": {
+    "total_bytes_equals_forward_plus_backward": true,
+    "total_packet_count_equals_forward_plus_backward": true
+  },
+  "extreme_rows": {
+    "bytes_per_second": {
+      "capture_id": "normal_v2_009",
+      "flow_id": "normal_v2_009:000011",
+      "protocol": 1,
+      "value": 867924.5283018867
+    },
+    "flow_duration": {
+      "capture_id": "normal_005_mixed",
+      "flow_id": "normal_005_mixed:000002",
+      "protocol": 6,
+      "value": 134.600429
+    },
+    "inter_arrival_std": {
+      "capture_id": "normal_004_udp",
+      "flow_id": "normal_004_udp:000001",
+      "protocol": 17,
+      "value": 5.132714667642914
+    },
+    "packets_per_second": {
+      "capture_id": "normal_v2_009",
+      "flow_id": "normal_v2_009:000011",
+      "protocol": 1,
+      "value": 9433.962264150943
+    },
+    "total_bytes": {
+      "capture_id": "normal_002_ssh",
+      "flow_id": "normal_002_ssh:000001",
+      "protocol": 6,
+      "value": 392958.0
+    },
+    "total_packet_count": {
+      "capture_id": "normal_002_ssh",
+      "flow_id": "normal_002_ssh:000001",
+      "protocol": 6,
+      "value": 4340.0
+    }
+  },
+  "feature_summaries": {
+    "ack_count": {
+      "count": 114,
+      "maximum": 4339.0,
+      "mean": 77.71052631578948,
+      "median": 0.0,
+      "minimum": 0.0,
+      "q1": 0.0,
+      "q3": 37.0,
+      "unique_count": 12,
+      "zero_fraction": 0.6754385964912281
+    },
+    "backward_bytes": {
+      "count": 114,
+      "maximum": 199881.0,
+      "mean": 5007.8859649122805,
+      "median": 116.0,
+      "minimum": 41.0,
+      "q1": 84.0,
+      "q3": 5228.0,
+      "unique_count": 64,
+      "zero_fraction": 0.0
+    },
+    "backward_packet_count": {
+      "count": 114,
+      "maximum": 2166.0,
+      "mean": 40.89473684210526,
+      "median": 1.0,
+      "minimum": 1.0,
+      "q1": 1.0,
+      "q3": 18.0,
+      "unique_count": 14,
+      "zero_fraction": 0.0
+    },
+    "bytes_per_second": {
+      "count": 114,
+      "maximum": 867924.5283018867,
+      "mean": 201080.03172703824,
+      "median": 99373.91640398477,
+      "minimum": 7.258890899201025,
+      "q1": 58138.97541983178,
+      "q3": 318039.9274047187,
+      "unique_count": 114,
+      "zero_fraction": 0.0
+    },
+    "connection_rate_last_10s": {
+      "count": 114,
+      "maximum": 2.8,
+      "mean": 0.6535087719298246,
+      "median": 0.4,
+      "minimum": 0.0,
+      "q1": 0.0,
+      "q3": 1.1,
+      "unique_count": 26,
+      "zero_fraction": 0.37719298245614036
+    },
+    "dst_port": {
+      "count": 114,
+      "maximum": 9999.0,
+      "mean": 3252.4298245614036,
+      "median": 22.0,
+      "minimum": 0.0,
+      "q1": 0.0,
+      "q3": 9999.0,
+      "unique_count": 3,
+      "zero_fraction": 0.3508771929824561
+    },
+    "failed_connection_rate_last_10s": {
+      "count": 114,
+      "maximum": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "minimum": 0.0,
+      "q1": 0.0,
+      "q3": 0.0,
+      "unique_count": 1,
+      "zero_fraction": 1.0
+    },
+    "fin_count": {
+      "count": 114,
+      "maximum": 2.0,
+      "mean": 0.631578947368421,
+      "median": 0.0,
+      "minimum": 0.0,
+      "q1": 0.0,
+      "q3": 2.0,
+      "unique_count": 2,
+      "zero_fraction": 0.6842105263157895
+    },
+    "flow_duration": {
+      "count": 114,
+      "maximum": 134.600429,
+      "mean": 4.6395955526315795,
+      "median": 0.0014385000000000001,
+      "minimum": 0.000212,
+      "q1": 0.00056875,
+      "q3": 0.16921424999999998,
+      "unique_count": 113,
+      "zero_fraction": 0.0
+    },
+    "flows_last_10s": {
+      "count": 114,
+      "maximum": 28.0,
+      "mean": 6.535087719298246,
+      "median": 4.0,
+      "minimum": 0.0,
+      "q1": 0.0,
+      "q3": 11.0,
+      "unique_count": 26,
+      "zero_fraction": 0.37719298245614036
+    },
+    "forward_bytes": {
+      "count": 114,
+      "maximum": 193077.0,
+      "mean": 4774.736842105263,
+      "median": 116.0,
+      "minimum": 41.0,
+      "q1": 84.0,
+      "q3": 4897.0,
+      "unique_count": 56,
+      "zero_fraction": 0.0
+    },
+    "forward_packet_count": {
+      "count": 114,
+      "maximum": 2174.0,
+      "mean": 41.36842105263158,
+      "median": 1.0,
+      "minimum": 1.0,
+      "q1": 1.0,
+      "q3": 21.0,
+      "unique_count": 11,
+      "zero_fraction": 0.0
+    },
+    "inter_arrival_mean": {
+      "count": 114,
+      "maximum": 8.127963461538462,
+      "mean": 0.15854209936835972,
+      "median": 0.0014385000000000001,
+      "minimum": 0.000212,
+      "q1": 0.00056875,
+      "q3": 0.0045526013513513515,
+      "unique_count": 113,
+      "zero_fraction": 0.0
+    },
+    "inter_arrival_std": {
+      "count": 114,
+      "maximum": 5.132714667642914,
+      "mean": 0.10158146040968752,
+      "median": 0.0,
+      "minimum": 0.0,
+      "q1": 0.0,
+      "q3": 0.010085803351480176,
+      "unique_count": 45,
+      "zero_fraction": 0.6140350877192983
+    },
+    "mean_packet_size": {
+      "count": 114,
+      "maximum": 1028.0,
+      "mean": 146.63644003951825,
+      "median": 105.5,
+      "minimum": 41.0,
+      "q1": 83.25,
+      "q3": 240.28303382663847,
+      "unique_count": 60,
+      "zero_fraction": 0.0
+    },
+    "packets_per_second": {
+      "count": 114,
+      "maximum": 9433.962264150943,
+      "mean": 2061.420156173434,
+      "median": 1391.7295371737393,
+      "minimum": 0.13249605291892352,
+      "q1": 227.64442889863096,
+      "q3": 3516.9362221544097,
+      "unique_count": 113,
+      "zero_fraction": 0.0
+    },
+    "protocol": {
+      "count": 114,
+      "maximum": 17.0,
+      "mean": 7.815789473684211,
+      "median": 6.0,
+      "minimum": 1.0,
+      "q1": 1.0,
+      "q3": 17.0,
+      "unique_count": 3,
+      "zero_fraction": 0.0
+    },
+    "rst_count": {
+      "count": 114,
+      "maximum": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "minimum": 0.0,
+      "q1": 0.0,
+      "q3": 0.0,
+      "unique_count": 1,
+      "zero_fraction": 1.0
+    },
+    "src_port": {
+      "count": 114,
+      "maximum": 60942.0,
+      "mean": 28093.894736842107,
+      "median": 34982.5,
+      "minimum": 0.0,
+      "q1": 0.0,
+      "q3": 45610.75,
+      "unique_count": 75,
+      "zero_fraction": 0.3508771929824561
+    },
+    "std_packet_size": {
+      "count": 114,
+      "maximum": 420.7653822799682,
+      "mean": 127.25471855688137,
+      "median": 0.0,
+      "minimum": 0.0,
+      "q1": 0.0,
+      "q3": 397.53780681997995,
+      "unique_count": 19,
+      "zero_fraction": 0.6578947368421053
+    },
+    "syn_count": {
+      "count": 114,
+      "maximum": 2.0,
+      "mean": 0.6491228070175439,
+      "median": 0.0,
+      "minimum": 0.0,
+      "q1": 0.0,
+      "q3": 2.0,
+      "unique_count": 2,
+      "zero_fraction": 0.6754385964912281
+    },
+    "total_bytes": {
+      "count": 114,
+      "maximum": 392958.0,
+      "mean": 9782.622807017544,
+      "median": 232.0,
+      "minimum": 82.0,
+      "q1": 168.0,
+      "q3": 10125.0,
+      "unique_count": 64,
+      "zero_fraction": 0.0
+    },
+    "total_packet_count": {
+      "count": 114,
+      "maximum": 4340.0,
+      "mean": 82.26315789473684,
+      "median": 2.0,
+      "minimum": 2.0,
+      "q1": 2.0,
+      "q3": 39.0,
+      "unique_count": 17,
+      "zero_fraction": 0.0
+    },
+    "unique_dst_ips_last_10s": {
+      "count": 114,
+      "maximum": 1.0,
+      "mean": 0.6228070175438597,
+      "median": 1.0,
+      "minimum": 0.0,
+      "q1": 0.0,
+      "q3": 1.0,
+      "unique_count": 2,
+      "zero_fraction": 0.37719298245614036
+    },
+    "unique_dst_ports_last_10s": {
+      "count": 114,
+      "maximum": 2.0,
+      "mean": 0.7017543859649122,
+      "median": 0.5,
+      "minimum": 0.0,
+      "q1": 0.0,
+      "q3": 1.0,
+      "unique_count": 3,
+      "zero_fraction": 0.5
+    }
+  },
+  "interface_counts": {
+    "ens3": 113,
+    "unverified": 1
+  },
+  "label_counts": {
+    "normal": 114
+  },
+  "missing_value_counts": {
+    "ack_count": 0,
+    "backward_bytes": 0,
+    "backward_packet_count": 0,
+    "bytes_per_second": 0,
+    "connection_rate_last_10s": 0,
+    "dst_port": 0,
+    "failed_connection_rate_last_10s": 0,
+    "fin_count": 0,
+    "flow_duration": 0,
+    "flows_last_10s": 0,
+    "forward_bytes": 0,
+    "forward_packet_count": 0,
+    "inter_arrival_mean": 0,
+    "inter_arrival_std": 0,
+    "mean_packet_size": 0,
+    "packets_per_second": 0,
+    "protocol": 0,
+    "rst_count": 0,
+    "src_port": 0,
+    "std_packet_size": 0,
+    "syn_count": 0,
+    "total_bytes": 0,
+    "total_packet_count": 0,
+    "unique_dst_ips_last_10s": 0,
+    "unique_dst_ports_last_10s": 0
+  },
+  "model_feature_count": 25,
+  "nonfinite_value_counts": {
+    "ack_count": 0,
+    "backward_bytes": 0,
+    "backward_packet_count": 0,
+    "bytes_per_second": 0,
+    "connection_rate_last_10s": 0,
+    "dst_port": 0,
+    "failed_connection_rate_last_10s": 0,
+    "fin_count": 0,
+    "flow_duration": 0,
+    "flows_last_10s": 0,
+    "forward_bytes": 0,
+    "forward_packet_count": 0,
+    "inter_arrival_mean": 0,
+    "inter_arrival_std": 0,
+    "mean_packet_size": 0,
+    "packets_per_second": 0,
+    "protocol": 0,
+    "rst_count": 0,
+    "src_port": 0,
+    "std_packet_size": 0,
+    "syn_count": 0,
+    "total_bytes": 0,
+    "total_packet_count": 0,
+    "unique_dst_ips_last_10s": 0,
+    "unique_dst_ports_last_10s": 0
+  },
+  "protocol_counts": {
+    "1": 40,
+    "17": 37,
+    "6": 37
+  },
+  "quality_report_version": 1,
+  "ready_for_model_training": false,
+  "row_count": 114,
+  "screening": {
+    "minimum_row_heuristic": 100,
+    "zero_dominated_fraction": 0.9
+  },
+  "termination_counts": {
+    "capture_end": 58,
+    "idle_timeout": 20,
+    "tcp_fin": 36
+  },
+  "warnings": [
+    {
+      "code": "single_label",
+      "message": "Only one label is present; no anomalous/attack evaluation rows exist."
+    },
+    {
+      "code": "constant_features",
+      "message": "2 model features are constant and add no separation in this dataset."
+    },
+    {
+      "code": "empty_captures",
+      "message": "2 source capture produced no flow rows."
+    },
+    {
+      "code": "unverified_interface",
+      "message": "1 rows come from a capture with an unverified interface."
+    }
+  ],
+  "zero_dominated_features": [
+    "rst_count",
+    "failed_connection_rate_last_10s"
+  ]
+}
